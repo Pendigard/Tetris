@@ -29,4 +29,16 @@ public abstract class Piece {
     public void moveDown() {
         y++;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Block[][] getBlocks() {
+        return blocks[rotation];
+    }
 }
