@@ -1,5 +1,6 @@
 package model.game;
 
+import model.block.Block;
 import model.grid.Grid;
 import model.piece.*;
 
@@ -122,13 +123,20 @@ public class Game {
 
     public void hardDrop() {
         while (grid.CanGoDown(nextPieces[0])) {
+            System.out.println("Can go down");
             nextPieces[0].moveDown();
         }
     }
 
     public void print() {
-        for (Piece p : nextPieces) {
-            p.print();
+        Block[][] g = grid.getGrid();
+        for (int i = 0; i < g.length; i++) {
+            for (int j = 0; j < g[i].length; j++)
+                if (getCurrentPiece().getY() <= i && i < getCurrentPiece().getY() + getCurrentPiece().getBlocks().length &&
+                        getCurrentPiece().getX() <= j && j < getCurrentPiece().getX() + getCurrentPiece().getBlocks()[0].length)
+                    System.out.print(getCurrentPiece().getBlocks()[i - getCurrentPiece().getY()][j - getCurrentPiece().getX()].getType().toString().charAt(0));
+                else
+                    System.out.print(g[i][j].getType().toString().charAt(0));
             System.out.println();
         }
     }

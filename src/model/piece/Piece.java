@@ -9,8 +9,8 @@ public abstract class Piece {
     private int y;
 
     public Piece() {
-        x = 0;
-        y = 5;
+        x = 5;
+        y = 0;
         rotation = 0;
         initBlocks();
     }
