@@ -4,16 +4,12 @@ import model.block.BlockType;
 import model.piece.Piece;
 
 public class Grid {
-    private int lenght;
-    private int width;
-    private  Block[][] grd;
+    private Block[][] grd;
 
-    public Grid(int lenght, int width){
-        this.lenght = lenght;
-        this.width = width;
-        grd = new Block[lenght][width];
+    public Grid(int length, int width){
+        grd = new Block[length][width];
 
-        for(int i=0;i < lenght; i++){
+        for(int i=0;i < length; i++){
             for(int j=0;j < width; j++){
                 grd[i][j] = new Block();
             }
