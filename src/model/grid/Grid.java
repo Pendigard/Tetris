@@ -47,7 +47,7 @@ public class Grid {
                 }
             }
         }
-        return false;
+        return true;
     }
 
     public boolean CanGoRight(Piece p) {
@@ -62,7 +62,7 @@ public class Grid {
                 }
             }
         }
-        return false;
+        return true;
     }
 
     public boolean CanRotate(Piece p) {
@@ -77,6 +77,6 @@ public class Grid {
                 }
             }
         }
-        return false;
+        return true;
     }
 }
