@@ -99,7 +99,7 @@ public class Grid {
             for (int j = 0; j < piece[i].length; j++) {
 
                 if (piece[i][j].getType() != BlockType.EMPTY){
-                        grd[p.getX() + i][p.getY() + j].setType(piece[i][j].getType())
+                        grd[p.getX() + i][p.getY() + j].setType(piece[i][j].getType());
 
                 }
 
