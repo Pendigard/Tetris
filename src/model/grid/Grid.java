@@ -16,6 +16,10 @@ public class Grid {
         }
     }
 
+    public Block[][] getGrid(){
+        return grd;
+    }
+
     public void reset() {
         for (Block[] blocks : grd) {
             for (Block block : blocks) {
@@ -34,6 +38,7 @@ public class Grid {
                         grd[p.getX() + i][p.getY() + j+1].getType() != BlockType.EMPTY) {
                     return false;
                 }
+
             }
         }
         return false;
@@ -49,6 +54,7 @@ public class Grid {
                         grd[p.getX() + i-1][p.getY() + j].getType() != BlockType.EMPTY) {
                     return false;
                 }
+
             }
         }
         return true;
@@ -64,6 +70,7 @@ public class Grid {
                         grd[p.getX() + i+1][p.getY() + j].getType() != BlockType.EMPTY) {
                     return false;
                 }
+
             }
         }
         return true;
@@ -79,8 +86,28 @@ public class Grid {
                         grd[p.getX() + i][p.getY() + j].getType() != BlockType.EMPTY) {
                     return false;
                 }
+
             }
         }
         return true;
+    }
+
+    public void putPiece(Piece p) {
+        Block[][] piece = p.getBlocks();
+
+        for (int i = 0; i < piece.length; i++) {
+            for (int j = 0; j < piece[i].length; j++) {
+
+                if (piece[i][j].getType() != BlockType.EMPTY){
+                        grd[p.getX() + i][p.getY() + j].setType(piece[i][j].getType())
+
+                }
+
+            }
+        }
+    }
+
+    public int checkLine(Piece p){
+        return 3;
     }
 }
