@@ -63,7 +63,7 @@ public class Game {
         grid.reset();
     }
 
-    public Piece getRandPiece() {
+    private Piece getRandPiece() {
         int rand = (int) (Math.random() * 7);
         return switch (rand) {
             case 1 -> new PieceJ();
@@ -74,6 +74,10 @@ public class Game {
             case 6 -> new PieceI();
             default -> new PieceL();
         };
+    }
+
+    public Piece getCurrentPiece() {
+        return nextPieces[0];
     }
 
     public void initNextPieces() {
@@ -114,5 +118,18 @@ public class Game {
 
     public void rotate() {
         nextPieces[0].rotate();
+    }
+
+    public void hardDrop() {
+        while (grid.CanGoDown(nextPieces[0])) {
+            nextPieces[0].moveDown();
+        }
+    }
+
+    public void print() {
+        for (Piece p : nextPieces) {
+            p.print();
+            System.out.println();
+        }
     }
 }

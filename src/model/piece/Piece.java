@@ -45,4 +45,13 @@ public abstract class Piece {
     public Block[][] getBlocks() {
         return blocks[rotation];
     }
+
+    public void print() {
+        for (Block[] block : blocks[rotation]) {
+            for (Block b : block) {
+                System.out.print(b.getType().toString().charAt(0));
+            }
+            System.out.println();
+        }
+    }
 }
