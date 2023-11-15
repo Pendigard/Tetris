@@ -9,9 +9,9 @@ public class Game {
     private int highScore;
     private int level;
     private int lines;
-    Piece[] nextPieces = new Piece[5];
+    private Piece[] nextPieces = new Piece[5];
 
-    Grid grid = new Grid(20, 10);
+    private Grid grid = new Grid(20, 10);
 
     public Game() {
         reset();
@@ -87,5 +87,13 @@ public class Game {
             nextPieces[i] = nextPieces[i + 1];
         }
         nextPieces[nextPieces.length - 1] = getRandPiece();
+    }
+
+    public Piece[] getNextPieces() {
+        return nextPieces;
+    }
+
+    public Grid getGrid() {
+        return grid;
     }
 }
