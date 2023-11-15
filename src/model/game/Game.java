@@ -60,6 +60,7 @@ public class Game {
         level = 1;
         lines = 0;
         initNextPieces();
+        grid.reset();
     }
 
     public Piece getRandPiece() {
