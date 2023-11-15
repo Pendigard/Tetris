@@ -96,4 +96,23 @@ public class Game {
     public Grid getGrid() {
         return grid;
     }
+
+    public void moveDown() {
+        if (grid.CanGoDown(nextPieces[0]))
+            nextPieces[0].moveDown();
+    }
+
+    public void moveLeft() {
+        if (grid.CanGoLeft(nextPieces[0]))
+            nextPieces[0].moveLeft();
+    }
+
+    public void moveRight() {
+        if (grid.CanGoRight(nextPieces[0]))
+            nextPieces[0].moveRight();
+    }
+
+    public void rotate() {
+        nextPieces[0].rotate();
+    }
 }
