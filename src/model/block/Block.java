@@ -15,6 +15,10 @@ public class Block {
     public BlockType getType() {
         return type;
     }
+
+    public void setType(BlockType type) {
+        this.type = type;
+    }
 }
 
 

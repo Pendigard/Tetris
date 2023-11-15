@@ -16,6 +16,14 @@ public class Grid {
         }
     }
 
+    public void reset() {
+        for (Block[] blocks : grd) {
+            for (Block block : blocks) {
+                block.setType(BlockType.EMPTY);
+            }
+        }
+    }
+
     public boolean CanGoDown(Piece p) {
         Block[][] piece = p.getBlocks();
 
