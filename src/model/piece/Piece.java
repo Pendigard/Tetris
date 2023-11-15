@@ -20,6 +20,10 @@ public abstract class Piece {
         rotation = (rotation + 1) % blocks.length;
     }
 
+    public void setRotation(int rotation) {
+        this.rotation = rotation;
+    }
+
     public void moveLeft() {
         x--;
     }
