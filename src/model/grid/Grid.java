@@ -20,28 +20,63 @@ public class Grid {
         }
     }
 
-    public boolean CanGoDown(Piece p){
-        Block[][][] piece;
-        piece = p.getBlock;
+    public boolean CanGoDown(Piece p) {
+        Block[][] piece = p.getBlocks();
+
         for (int i = 0; i < piece.length; i++) {
             for (int j = 0; j < piece[i].length; j++) {
-                for (int k = 0; k < piece[i][j].length; k++) {
 
-                    if(piece[i][j][k].getType() != BlockType.EMPTY &&
-                            grd[p.getX()+j][p.getY()+k].getType() != BlockType.EMPTY){
-                        return false;
-                    }
-
+                if (piece[i][j].getType() != BlockType.EMPTY &&
+                        grd[p.getX() + i][p.getY() + j+1].getType() != BlockType.EMPTY) {
+                    return false;
                 }
             }
         }
+        return false;
     }
 
-    public boolean CanGoLeft(){
+    public boolean CanGoLeft(Piece p) {
+        Block[][] piece = p.getBlocks();
 
+        for (int i = 0; i < piece.length; i++) {
+            for (int j = 0; j < piece[i].length; j++) {
+
+                if (piece[i][j].getType() != BlockType.EMPTY &&
+                        grd[p.getX() + i-1][p.getY() + j].getType() != BlockType.EMPTY) {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
-    public boolean CanGoRight(){
+    public boolean CanGoRight(Piece p) {
+        Block[][] piece = p.getBlocks();
 
+        for (int i = 0; i < piece.length; i++) {
+            for (int j = 0; j < piece[i].length; j++) {
+
+                if (piece[i][j].getType() != BlockType.EMPTY &&
+                        grd[p.getX() + i+1][p.getY() + j].getType() != BlockType.EMPTY) {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean CanRotate(Piece p) {
+        Block[][] piece = p.getBlocks();
+
+        for (int i = 0; i < piece.length; i++) {
+            for (int j = 0; j < piece[i].length; j++) {
+
+                if (piece[i][j].getType() != BlockType.EMPTY &&
+                        grd[p.getX() + i][p.getY() + j].getType() != BlockType.EMPTY) {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 }
