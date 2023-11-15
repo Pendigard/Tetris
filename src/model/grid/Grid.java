@@ -34,8 +34,8 @@ public class Grid {
         for (int i = 0; i < piece.length; i++) {
             for (int j = 0; j < piece[i].length; j++) {
 
-                if ( grd[0].length >= p.getY()+j+1 || (piece[i][j].getType() != BlockType.EMPTY &&
-                        grd[p.getX() + i][p.getY() + j+1].getType() != BlockType.EMPTY) ){
+                if ( p.getY()+i+1 < grd.length && piece[i][j].getType() != BlockType.EMPTY &&
+                        grd[p.getY() + i+1][p.getX() + j].getType() != BlockType.EMPTY ){
                     return false;
                 }
 
@@ -49,8 +49,9 @@ public class Grid {
 
         for (int i = 0; i < piece.length; i++) {
             for (int j = 0; j < piece[i].length; j++) {
-                if (piece[i][j].getType() != BlockType.EMPTY &&
-                        grd[p.getX() + i-1][p.getY() + j].getType() != BlockType.EMPTY) {
+
+                if( p.getX() + j-1 > 0 && piece[i][j].getType() != BlockType.EMPTY &&
+                        grd[p.getY() + i][p.getX() + j-1].getType() != BlockType.EMPTY) {
                     return false;
                 }
 
@@ -65,8 +66,8 @@ public class Grid {
         for (int i = 0; i < piece.length; i++) {
             for (int j = 0; j < piece[i].length; j++) {
 
-                if (piece[i][j].getType() != BlockType.EMPTY &&
-                        grd[p.getX() + i+1][p.getY() + j].getType() != BlockType.EMPTY) {
+                if( p.getX() + j-1 < grd[0].length && piece[i][j].getType() != BlockType.EMPTY &&
+                        grd[p.getY() + i][p.getX() + j-1].getType() != BlockType.EMPTY ){
                     return false;
                 }
 
@@ -84,7 +85,7 @@ public class Grid {
                 for (int j = 0; j < piece[i].length; j++) {
 
                     if (piece[i][j].getType() != BlockType.EMPTY &&
-                            grd[p.getX() + i][p.getY() + j].getType() == BlockType.EMPTY) {
+                            grd[p.getY() + i][p.getX() + j].getType() == BlockType.EMPTY) {
                         return p.getRotation();
                     }
 
@@ -101,7 +102,7 @@ public class Grid {
             for (int j = 0; j < piece[i].length; j++) {
 
                 if (piece[i][j].getType() != BlockType.EMPTY){
-                        grd[p.getX() + i][p.getY() + j].setType(piece[i][j].getType());
+                        grd[p.getY() + i][p.getX() + j].setType(piece[i][j].getType());
                 }
 
             }
@@ -110,9 +111,9 @@ public class Grid {
 
     public int checkLine(Piece p){
         int result=0;
-        for(int i=grd[0].length;i>0;i--){
+        for(int i=grd.length;i>0;i--){
             boolean full = true;
-            for(int j=0;j<grd.length;j++){
+            for(int j=0;j<grd[0].length;j++){
                 if (grd[i][j].getType() == BlockType.EMPTY) {
                     full = false;
                     break;
