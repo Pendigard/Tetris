@@ -42,6 +42,10 @@ public abstract class Piece {
         return y;
     }
 
+    public int getRotation() {
+        return rotation;
+    }
+
     public Block[][] getBlocks() {
         return blocks[rotation];
     }
