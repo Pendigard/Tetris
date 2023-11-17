@@ -3,8 +3,12 @@ package model.game;
 import model.block.Block;
 import model.grid.Grid;
 import model.piece.*;
+import model.scheduler.Scheduler;
+import view.screen.Screen;
 
-public class Game {
+import java.util.Observable;
+
+public class Game extends Observable implements Runnable {
 
     private int score;
     private int highScore;
@@ -16,6 +20,7 @@ public class Game {
 
     public Game() {
         reset();
+        new Scheduler(this).start();
     }
 
     public void addScore(int score) {
@@ -139,5 +144,11 @@ public class Game {
                     System.out.print(g[i][j].getType().toString().charAt(0));
             System.out.println();
         }
+    }
+
+    @Override
+    public void run() {
+        setChanged();
+        notifyObservers();
     }
 }

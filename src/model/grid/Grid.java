@@ -20,6 +20,18 @@ public class Grid {
         return grd;
     }
 
+    public int getNbRows() {
+        return grd.length;
+    }
+
+    public int getNbColumns() {
+        return grd[0].length;
+    }
+
+    public Block getBlock(int i, int j) {
+        return grd[i][j];
+    }
+
     public void reset() {
         for (Block[] blocks : grd) {
             for (Block block : blocks) {
