@@ -14,6 +14,6 @@ public class GridWidget extends Widget {
 
     @Override
     public void paint(Graphics g, Theme theme, Game game) {
-        theme.drawGrid(g, this, game.getGrid());
+        theme.drawGrid(g, this, game.getGrid(), game.getCurrentPiece());
     }
 }

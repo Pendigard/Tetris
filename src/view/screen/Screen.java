@@ -16,16 +16,19 @@ public class Screen extends JFrame implements Observer {
 
         Display display;
 
-        public Screen(Display display) {
+        public Screen(int width, int height) {
             setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setSize(1600, 900);
+            setSize(width, height);
+
+            //display.draw(getGraphics(), game);
+            setVisible(true);
+        }
+
+        public void addDisplay(Display display) {
             this.display = display;
             for (Widget widget : this.display.widgets) {
                 add(widget);
             }
-
-            //display.draw(getGraphics(), game);
-            setVisible(true);
         }
 
         public void setContentPane(JPanel jp) {

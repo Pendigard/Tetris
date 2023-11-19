@@ -29,5 +29,9 @@ public abstract class Widget extends Canvas {
             return propY;
         }
 
+        public int setPropX(int x) {
+            return propX = x;
+        }
+
         public abstract void paint(Graphics g, Theme theme, Game game);
 }

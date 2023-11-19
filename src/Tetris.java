@@ -14,9 +14,10 @@ public class Tetris {
                    Theme theme = new ClassicTheme("Classic");
                    Game game = new Game();
                    Display display = new Display(theme, game);
-                   GridWidget gridWidget = new GridWidget(50, 0, 10);
+                   GridWidget gridWidget = new GridWidget(50, 0, 20);
                    display.widgets.add(gridWidget);
-                   Screen screen = new Screen(display);
+                   Screen screen = new Screen(1600, 900);
+                   screen.addDisplay(display);
                    game.addObserver(screen);
                    game.addObserver(display);
                    screen.setVisible(true);

@@ -16,11 +16,15 @@ public class Game extends Observable implements Runnable {
     private int lines;
     private Piece[] nextPieces = new Piece[5];
 
+    private Scheduler scheduler = new Scheduler(this);
+
     private Grid grid = new Grid(20, 10);
+
+    private int timeSaver = 0; // Save the time elapsed
 
     public Game() {
         reset();
-        new Scheduler(this).start();
+        scheduler.start();
     }
 
     public void addScore(int score) {
@@ -148,6 +152,11 @@ public class Game extends Observable implements Runnable {
 
     @Override
     public void run() {
+        System.out.println(scheduler.getTickElapsed());
+        if (scheduler.getTickElapsed() - timeSaver >= 1000/400) {
+            timeSaver = scheduler.getTickElapsed();
+            moveDown();
+        }
         setChanged();
         notifyObservers();
     }
