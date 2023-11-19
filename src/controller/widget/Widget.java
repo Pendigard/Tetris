@@ -1,6 +1,7 @@
 package controller.widget;
 
 import model.game.Game;
+import model.party.Party;
 import view.theme.Theme;
 
 import java.awt.*;
@@ -10,6 +11,8 @@ public abstract class Widget extends Canvas {
         protected int propX;
         protected int propY;
         protected int size;
+
+        protected Party party;
 
         public Widget(int x, int y, int size) {
             this.propX = x;
@@ -29,9 +32,5 @@ public abstract class Widget extends Canvas {
             return propY;
         }
 
-        public int setPropX(int x) {
-            return propX = x;
-        }
-
-        public abstract void paint(Graphics g, Theme theme, Game game);
+        public abstract void paint(Graphics g, Theme theme);
 }

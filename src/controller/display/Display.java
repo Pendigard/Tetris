@@ -24,12 +24,6 @@ public class Display implements Observer {
         this.game = game;
     }
 
-    public void draw(Graphics graphics, Game game) {
-        for (Widget graphicElement : widgets) {
-            graphicElement.paint(graphics, theme, game);
-        }
-    }
-
     @Override
     public void update(Observable o, Object arg) {
 
@@ -40,7 +34,7 @@ public class Display implements Observer {
                 return;
             }
             Graphics g = bs.getDrawGraphics();
-            widget.paint(g, theme, game); // appel de la fonction pour dessiner
+            widget.paint(g, theme); // appel de la fonction pour dessiner
             g.dispose();
             //Toolkit.getDefaultToolkit().sync(); // forcer la synchronisation
             bs.show();

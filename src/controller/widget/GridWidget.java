@@ -1,19 +1,18 @@
 package controller.widget;
 
-import model.game.Game;
-import model.grid.Grid;
+import model.party.Party;
 import view.theme.Theme;
 
 import java.awt.*;
 
-public class GridWidget extends Widget {
+public class GridWidget extends PartyWidget {
 
-    public GridWidget(int x, int y, int size) {
-        super(x, y, size);
+    public GridWidget(int x, int y, int size, Party party) {
+        super(x, y, size, party);
     }
 
     @Override
-    public void paint(Graphics g, Theme theme, Game game) {
-        theme.drawGrid(g, this, game.getGrid(), game.getCurrentPiece());
+    public void paint(Graphics g, Theme theme) {
+        theme.drawGrid(g, this, party.getGrid(), party.getCurrentPiece());
     }
 }
