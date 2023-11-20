@@ -1,5 +1,7 @@
 package model.scheduler;
 
+import view.theme.Theme;
+
 public class Scheduler extends Thread {
 
         public Runnable runnable;

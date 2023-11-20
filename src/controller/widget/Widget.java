@@ -1,7 +1,5 @@
 package controller.widget;
 
-import model.game.Game;
-import model.party.Party;
 import view.theme.Theme;
 
 import java.awt.*;

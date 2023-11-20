@@ -5,9 +5,6 @@ import model.block.Block;
 import model.block.BlockType;
 import model.grid.Grid;
 import model.piece.Piece;
-
-import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class ClassicTheme extends Theme {
@@ -42,7 +39,7 @@ public class ClassicTheme extends Theme {
         Block[][] blocks = piece.getBlocks();
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
-                if (blocks[i][j] != null) {
+                if (blocks[i][j].getType() != BlockType.EMPTY) {
                     drawBlock(graphics, gridWidget, blocks[i][j], piece.getX() + j, piece.getY() + i);
                 }
             }

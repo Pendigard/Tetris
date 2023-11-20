@@ -41,73 +41,50 @@ public class Grid {
     }
 
     public boolean CanGoDown(Piece p) {
-        Block[][] piece = p.getBlocks();
-
-        for (int i = 0; i < piece.length; i++) {
-            for (int j = 0; j < piece[i].length; j++) {
-                if (piece[i][j].getType() != BlockType.EMPTY) {
-                    if (p.getY() + j + 1 >= grd.length) {
-                        return false;
-                    } else if (grd[p.getY() + j + 1][p.getX() + i].getType() != BlockType.EMPTY) {
-                        return false;
-                    }
-                }
-
-            }
-        }
-        return true;
+        p.moveDown();
+        boolean valid = isValidPosition(p);
+        p.moveUp();
+        return valid;
     }
 
     public boolean CanGoLeft(Piece p) {
-        Block[][] piece = p.getBlocks();
-        for (int i = 0; i < piece.length; i++) {
-            for (int j = 0; j < piece[i].length; j++) {
-                if (piece[i][j].getType() != BlockType.EMPTY) {
-                    if (p.getX() + j - 1 < 0) {
-                        return false;
-                    } else if (grd[p.getY() + i][p.getX() + j - 1].getType() != BlockType.EMPTY) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
+        p.moveLeft();
+        boolean valid = isValidPosition(p);
+        p.moveRight();
+        return valid;
     }
 
     public boolean CanGoRight(Piece p) {
-        Block[][] piece = p.getBlocks();
+        p.moveRight();
+        boolean valid = isValidPosition(p);
+        p.moveLeft();
+        return valid;
+    }
 
+    public int getRotation(Piece p) {
+        for(int k=0;k<4;k++) {
+            p.rotate();
+            if (isValidPosition(p)) {
+                return p.getRotation();
+            }
+        }
+        return -1;
+    }
+
+    public boolean isValidPosition(Piece p) {
+        Block[][] piece = p.getBlocks();
         for (int i = 0; i < piece.length; i++) {
             for (int j = 0; j < piece[i].length; j++) {
                 if (piece[i][j].getType() != BlockType.EMPTY) {
-                    if (p.getX() + j + 1 >= grd[0].length) {
+                    if (p.getX() + j < 0 || p.getX() + j >= grd[0].length || p.getY() + i >= grd.length) {
                         return false;
-                    } else if (grd[p.getY() + i][p.getX() + j + 1].getType() != BlockType.EMPTY) {
+                    } else if (grd[p.getY() + i][p.getX() + j].getType() != BlockType.EMPTY) {
                         return false;
                     }
                 }
             }
         }
         return true;
-    }
-
-    public int CanRotate(Piece p) {
-        for(int k=0;k<4;k++) {
-            p.rotate();
-            Block[][] piece = p.getBlocks();
-
-            for (int i = 0; i < piece.length; i++) {
-                for (int j = 0; j < piece[i].length; j++) {
-
-                    if (piece[i][j].getType() != BlockType.EMPTY &&
-                            grd[p.getY() + i][p.getX() + j].getType() == BlockType.EMPTY) {
-                        return p.getRotation();
-                    }
-
-                }
-            }
-        }
-        return -1;
     }
 
     public void putPiece(Piece p) {

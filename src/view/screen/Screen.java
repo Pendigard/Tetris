@@ -17,7 +17,7 @@ public class Screen extends JFrame implements Observer {
         Game game;
 
         public Screen(int width, int height, Game game) {
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(width, height);
             display = null;
             this.game = game;

@@ -118,7 +118,8 @@ public class Party {
     }
 
     public void rotate() {
-        nextPieces[0].rotate();
+        int rotation = grid.getRotation(nextPieces[0]);
+        nextPieces[0].setRotation(rotation);
     }
 
     public void hardDrop() {
