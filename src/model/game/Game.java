@@ -4,6 +4,7 @@ package model.game;
 import model.party.Party;
 import model.scheduler.Scheduler;
 
+import java.awt.event.KeyEvent;
 import java.util.Observable;
 
 public class Game extends Observable implements Runnable {
@@ -16,9 +17,18 @@ public class Game extends Observable implements Runnable {
         scheduler.start();
     }
 
+    public void keyPressed(KeyEvent keyEvent) {
+        switch (keyEvent.getKeyCode()) {
+            case KeyEvent.VK_LEFT -> party.moveLeft();
+            case KeyEvent.VK_RIGHT -> party.moveRight();
+            case KeyEvent.VK_DOWN -> party.moveDown();
+            case KeyEvent.VK_UP -> party.rotate();
+        }
+    }
+
     @Override
     public void run() {
-        if (scheduler.getTickElapsed() - timeSaver >= 1000/400) {
+        if (scheduler.getTickElapsed() - timeSaver >= 1000/100) {
             timeSaver = scheduler.getTickElapsed();
             party.moveDown();
         }

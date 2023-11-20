@@ -12,10 +12,6 @@ import java.awt.*;
 
 public class ClassicTheme extends Theme {
 
-    public ClassicTheme(String name) {
-        super(name);
-    }
-
     @Override
     public Color getColor(Block block) {
         return switch (block.getType()) {
@@ -33,10 +29,12 @@ public class ClassicTheme extends Theme {
     @Override
     public void drawBlock(Graphics graphics, GridWidget gridWidget, Block block, int x, int y) {
         graphics.setColor(getColor(block));
-        graphics.fillRect(gridWidget.getPropX() + x * gridWidget.getPropSize(), gridWidget.getPropY() + y * gridWidget.getPropSize(), gridWidget.getPropSize(), gridWidget.getPropSize());
+        double realX = gridWidget.getPropX()/100.0 * width;
+        double realY = gridWidget.getPropY()/100.0 * height;
+        double realCellSize = (gridWidget.getPropHeight()/100.0 * height)/gridWidget.getParty().getGrid().getNbRows();
+        graphics.fillRect( (int)realX + x * (int)realCellSize, (int)realY + y * (int)realCellSize, (int)realCellSize, (int)realCellSize);
         graphics.setColor(Color.BLACK);
-        graphics.drawRect(gridWidget.getPropX() + x * gridWidget.getPropSize(), gridWidget.getPropY() + y * gridWidget.getPropSize(), gridWidget.getPropSize(), gridWidget.getPropSize());
-
+        graphics.drawRect((int)realX + x * (int)realCellSize, (int)realY + y * (int)realCellSize, (int)realCellSize, (int)realCellSize);
     }
 
     @Override
@@ -54,8 +52,6 @@ public class ClassicTheme extends Theme {
 
     @Override
     public void drawGrid(Graphics graphics, GridWidget gridWidget, Grid grid, Piece currentPiece) {
-        int x = gridWidget.getPropX();
-        int y = gridWidget.getPropY();
         for (int i = 0; i < grid.getNbRows(); i++) {
             for (int j = 0; j < grid.getNbColumns(); j++) {
                 Block block = grid.getBlock(i, j);

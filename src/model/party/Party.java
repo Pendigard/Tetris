@@ -123,7 +123,6 @@ public class Party {
 
     public void hardDrop() {
         while (grid.CanGoDown(nextPieces[0])) {
-            System.out.println("Can go down");
             nextPieces[0].moveDown();
         }
     }

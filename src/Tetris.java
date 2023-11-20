@@ -11,15 +11,14 @@ public class Tetris {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
                public void run() {
-                   Theme theme = new ClassicTheme("Classic");
+                   Theme theme = new ClassicTheme();
                    Game game = new Game();
-                   Display display = new Display(theme, game);
-                   GridWidget gridWidget = new GridWidget(50, 0, 20, game.party);
+                   Screen screen = new Screen(800, 800, game);
+                   Display display = new Display(theme);
+                   GridWidget gridWidget = new GridWidget(30, 8, 80, game.party);
                    display.widgets.add(gridWidget);
-                   Screen screen = new Screen(1600, 900);
                    screen.addDisplay(display);
                    game.addObserver(screen);
-                   game.addObserver(display);
                    screen.setVisible(true);
                }
            }

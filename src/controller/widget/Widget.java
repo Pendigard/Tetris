@@ -10,18 +10,22 @@ public abstract class Widget extends Canvas {
 
         protected int propX;
         protected int propY;
-        protected int size;
+        protected int propWidth;
+        protected int propHeight;
 
-        protected Party party;
-
-        public Widget(int x, int y, int size) {
+        public Widget(int x, int y, int propWidth, int propHeight) {
             this.propX = x;
             this.propY = y;
-            this.size = size;
+            this.propWidth = propWidth;
+            this.propHeight = propHeight;
         }
 
-        public int getPropSize() {
-            return size;
+        public int getPropWidth() {
+            return propWidth;
+        }
+
+        public int getPropHeight() {
+            return propHeight;
         }
 
         public int getPropX() {

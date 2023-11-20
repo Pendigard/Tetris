@@ -9,15 +9,14 @@ import java.awt.*;
 
 public abstract class Theme {
 
-    protected String name;
+    protected int width = 0;
+    protected int height = 0;
 
-    public Theme(String name) {
-        this.name = name;
+    public void setThemeSize(int width, int height) {
+        this.width = width;
+        this.height = height;
     }
 
-    public String getName() {
-        return name;
-    }
 
     public abstract void drawGrid(Graphics graphics, GridWidget gridWidget, Grid grid, Piece currentPiece);
 

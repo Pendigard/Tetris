@@ -16,12 +16,28 @@ public class Display implements Observer {
 
     protected Theme theme;
 
-    protected Game game;
+    protected int width;
+    protected int height;
 
-    public Display(Theme theme, Game game) {
+
+    public Display(Theme theme) {
         widgets = new ArrayList<>();
         this.theme = theme;
-        this.game = game;
+        this.width = 0;
+        this.height = 0;
+    }
+
+    public Display(Theme theme, int width, int height) {
+        widgets = new ArrayList<>();
+        this.theme = theme;
+        this.width = width;
+        this.height = height;
+    }
+
+    public void setDisplaySize(int width, int height) {
+        this.width = width;
+        this.height = height;
+        theme.setThemeSize(width, height);
     }
 
     @Override

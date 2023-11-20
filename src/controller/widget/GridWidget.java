@@ -6,9 +6,9 @@ import view.theme.Theme;
 import java.awt.*;
 
 public class GridWidget extends PartyWidget {
-
-    public GridWidget(int x, int y, int size, Party party) {
-        super(x, y, size, party);
+    // Widget that displays the game grid and the current piece
+    public GridWidget(int propX, int propY, int propHeightSize, Party party) {
+        super(propX, propY, propHeightSize, propHeightSize, party);
     }
 
     @Override
