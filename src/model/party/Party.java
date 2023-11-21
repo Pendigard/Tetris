@@ -105,6 +105,7 @@ public class Party {
     public void moveDown() {
         if (grid.CanGoDown(nextPieces[0]))
             nextPieces[0].moveDown();
+        else putPiece();
     }
 
     public void moveLeft() {
@@ -126,6 +127,11 @@ public class Party {
         while (grid.CanGoDown(nextPieces[0])) {
             nextPieces[0].moveDown();
         }
+    }
+
+    public void putPiece(){
+        grid.putPiece(nextPieces[0]);
+        updateNextPieces();
     }
 
     public void print() {

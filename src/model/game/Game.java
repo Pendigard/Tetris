@@ -31,6 +31,7 @@ public class Game extends Observable implements Runnable {
         if (scheduler.getTickElapsed() - timeSaver >= 1000/100) {
             timeSaver = scheduler.getTickElapsed();
             party.moveDown();
+            party.addScore(party.getGrid().checkLine());
         }
         setChanged();
         notifyObservers();
