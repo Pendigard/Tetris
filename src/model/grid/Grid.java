@@ -103,7 +103,7 @@ public class Grid {
 
     public int checkLine(){
         int result=0;
-        for(int i = grd.length- 0x1; i>0; i--){
+        for(int i = 0; i < grd.length; i++){
             boolean full = true;
             for(int j=0;j<grd[0].length;j++){
                 if (grd[i][j].getType() == BlockType.EMPTY) {

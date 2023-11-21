@@ -153,6 +153,7 @@ public class Party {
         if (time - timeLastDrop >= getTimeInterval()) {
             timeLastDrop = time;
             moveDown();
+            addScore(grid.checkLine());
         }
         if (timePlaced > 0 && !grid.CanGoDown(getCurrentPiece())) {
             if (time - timePlaced >= 10) {
