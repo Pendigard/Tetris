@@ -2,7 +2,7 @@ package model.piece;
 
 import model.block.Block;
 
-public abstract class Piece {
+public abstract class Piece implements Cloneable {
     public Block[][][] blocks; // rotation, x, y
     private int rotation; // The current rotation
     private int x;
@@ -60,6 +60,16 @@ public abstract class Piece {
                 System.out.print(b.getType().toString().charAt(0));
             }
             System.out.println();
+        }
+    }
+
+    @Override
+    public Piece clone() {
+        try {
+            Piece clone = (Piece) super.clone();
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
         }
     }
 }

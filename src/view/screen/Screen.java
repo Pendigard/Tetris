@@ -5,6 +5,7 @@ import controller.widget.Widget;
 import model.game.Game;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
@@ -17,6 +18,7 @@ public class Screen extends JFrame implements Observer {
         Game game;
 
         public Screen(int width, int height, Game game) {
+            super("Tetris");
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(width, height);
             display = null;
@@ -28,6 +30,7 @@ public class Screen extends JFrame implements Observer {
                     game.keyPressed(e);
                 }
             });
+            this.game.addObserver(this);
         }
 
         public void addDisplay(Display display) {

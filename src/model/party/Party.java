@@ -10,6 +10,10 @@ public class Party {
     private int highScore;
     private int level;
     private int lines;
+
+    private int timeLastDrop = 0;
+    
+    private int timePlaced = -1;
     private Piece[] nextPieces = new Piece[5];
     private Grid grid = new Grid(20, 10);
 
@@ -125,6 +129,42 @@ public class Party {
     public void hardDrop() {
         while (grid.CanGoDown(nextPieces[0])) {
             nextPieces[0].moveDown();
+        }
+        grid.putPiece(nextPieces[0]);
+        updateNextPieces();
+    }
+
+    public int getTimeInterval() {
+        return 10 - (level - 1);
+    }
+
+    public Piece getGhostPiece() {
+        Piece ghostPiece = nextPieces[0].clone();
+        while (grid.CanGoDown(ghostPiece)) {
+            ghostPiece.moveDown();
+        }
+        return ghostPiece;
+    }
+
+
+
+    public void update(int time) {
+        if (time - timeLastDrop >= getTimeInterval()) {
+            timeLastDrop = time;
+            moveDown();
+        }
+        if (timePlaced > 0 && !grid.CanGoDown(getCurrentPiece())) {
+            if (time - timePlaced >= 10) {
+                timePlaced = -1;
+                grid.putPiece(getCurrentPiece());
+                updateNextPieces();
+            }
+        }
+        else if (!grid.CanGoDown(getCurrentPiece())) {
+            timePlaced = time;
+        }
+        else {
+            timePlaced = -1;
         }
     }
 

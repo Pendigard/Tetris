@@ -24,8 +24,9 @@ public class ClassicTheme extends Theme {
     }
 
     @Override
-    public void drawBlock(Graphics graphics, GridWidget gridWidget, Block block, int x, int y) {
-        graphics.setColor(getColor(block));
+    public void drawBlock(Graphics graphics, GridWidget gridWidget, Block block, int x, int y, int opacity) {
+        Color color = getColor(block);
+        graphics.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity));
         double realX = gridWidget.getPropX()/100.0 * width;
         double realY = gridWidget.getPropY()/100.0 * height;
         double realCellSize = (gridWidget.getPropHeight()/100.0 * height)/gridWidget.getParty().getGrid().getNbRows();
@@ -35,26 +36,28 @@ public class ClassicTheme extends Theme {
     }
 
     @Override
-    public void drawCurrentPiece(Graphics graphics, GridWidget gridWidget, Piece piece) {
+    public void drawPiece(Graphics graphics, GridWidget gridWidget, Piece piece, int opacity) {
         Block[][] blocks = piece.getBlocks();
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
                 if (blocks[i][j].getType() != BlockType.EMPTY) {
-                    drawBlock(graphics, gridWidget, blocks[i][j], piece.getX() + j, piece.getY() + i);
+                    drawBlock(graphics, gridWidget, blocks[i][j], piece.getX() + j, piece.getY() + i, opacity);
                 }
             }
         }
 
     }
 
+
     @Override
     public void drawGrid(Graphics graphics, GridWidget gridWidget, Grid grid, Piece currentPiece) {
         for (int i = 0; i < grid.getNbRows(); i++) {
             for (int j = 0; j < grid.getNbColumns(); j++) {
                 Block block = grid.getBlock(i, j);
-                drawBlock(graphics, gridWidget, block, j, i);
+                drawBlock(graphics, gridWidget, block, j, i, 255);
             }
         }
-        drawCurrentPiece(graphics, gridWidget, currentPiece);
+        drawPiece(graphics, gridWidget, currentPiece, 255);
+        drawPiece(graphics, gridWidget, gridWidget.getParty().getGhostPiece(), 100);
     }
 }

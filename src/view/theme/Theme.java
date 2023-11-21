@@ -22,7 +22,7 @@ public abstract class Theme {
 
     public abstract Color getColor(Block block);
 
-    public abstract void drawBlock(Graphics graphics, GridWidget gridWidget, Block block, int x, int y);
+    public abstract void drawBlock(Graphics graphics, GridWidget gridWidget, Block block, int x, int y, int opacity);
 
-    public abstract void drawCurrentPiece(Graphics graphics, GridWidget gridWidget, Piece piece);
+    public abstract void drawPiece(Graphics graphics, GridWidget gridWidget, Piece piece, int opacity);
 }

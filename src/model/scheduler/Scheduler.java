@@ -15,11 +15,15 @@ public class Scheduler extends Thread {
         public void run() {
             while(true) {
                 try {
-                    Thread.sleep(100);
+                    if (tickElapsed == 0)
+                        Thread.sleep(400); // At the beginning, we wait 400ms for the window to be displayed
+                    else
+                        Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 tickElapsed++;
+                System.out.println(tickElapsed);
                 runnable.run();
             }
         }
