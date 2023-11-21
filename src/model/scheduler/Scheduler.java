@@ -23,7 +23,6 @@ public class Scheduler extends Thread {
                     e.printStackTrace();
                 }
                 tickElapsed++;
-                System.out.println(tickElapsed);
                 runnable.run();
             }
         }
