@@ -101,9 +101,9 @@ public class Grid {
         }
     }
 
-    public int checkLine(Piece p){
+    public int checkLine(){
         int result=0;
-        for(int i=grd.length;i>0;i--){
+        for(int i = grd.length- 0x1; i>0; i--){
             boolean full = true;
             for(int j=0;j<grd[0].length;j++){
                 if (grd[i][j].getType() == BlockType.EMPTY) {
@@ -111,8 +111,19 @@ public class Grid {
                     break;
                 }
             }
-            if(full) result++;
+            if(full) {
+                result++;
+                removeLine(i);
+            }
         }
         return result;
+    }
+
+    public void removeLine(int val){
+        for(int i = val; i>0; i--) {
+            for (int j = 0; j < grd[0].length; j++) {
+                grd[i][j].setType(grd[i - 1][j].getType());
+            }
+        }
     }
 }
