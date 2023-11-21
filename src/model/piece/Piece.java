@@ -34,6 +34,10 @@ public abstract class Piece {
         y++;
     }
 
+    public void moveUp() {
+        y--;
+    }
+
     public int getX() {
         return x;
     }
