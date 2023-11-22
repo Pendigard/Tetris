@@ -9,7 +9,7 @@ import java.util.Observable;
 
 public class Game extends Observable implements Runnable {
 
-    private Scheduler scheduler = new Scheduler(this);
+    private Scheduler scheduler = new Scheduler(this, 10);
     public Party party = new Party();
 
     public Game() {
@@ -31,7 +31,7 @@ public class Game extends Observable implements Runnable {
 
     @Override
     public void run() {
-        party.update(scheduler.getTickElapsed());
+        party.update(scheduler.getMsElapsed());
         setChanged();
         notifyObservers();
     }

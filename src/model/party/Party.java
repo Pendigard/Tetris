@@ -10,9 +10,9 @@ public class Party {
     private int highScore;
     private int level;
     private int lines;
-
+    private int combo = 0;
     private int timeLastDrop = 0;
-    
+    private int timeLastLine = 0;
     private int timePlaced = -1;
     private Piece[] nextPieces = new Piece[5];
     private Grid grid = new Grid(20, 10);
@@ -133,17 +133,14 @@ public class Party {
             nextPieces[0].moveDown();
             nbDrop++;
         }
-<<<<<<< HEAD
         addScore(grid.putPiece(getCurrentPiece()));
-=======
         grid.putPiece(nextPieces[0]);
         addScore(nbDrop * 2);
->>>>>>> d830bcf57d66aad39394bd29e458b87875db2f99
         updateNextPieces();
     }
 
     public int getTimeInterval() {
-        return 10 - (level - 1);
+        return 1000 - (level - 1) * 100;
     }
 
     public Piece getGhostPiece() {
@@ -154,6 +151,27 @@ public class Party {
         return ghostPiece;
     }
 
+    public int convertLineToScore(int lines) {
+        return switch (lines) {
+            case 1 -> 100 * level;
+            case 2 -> 300 * level;
+            case 3 -> 500 * level;
+            case 4 -> 800 * level;
+            default -> 0;
+        };
+    }
+
+    public void updateScoreLine(int linesFulled, int time) {
+        lines += linesFulled;
+        score += convertLineToScore(linesFulled);
+        if (time - timeLastLine <= 500) {
+            combo++;
+            score += combo * 50 * level;
+        } else {
+            combo = 1;
+        }
+        timeLastLine = time;
+    }
 
 
     public void update(int time) {
@@ -162,9 +180,12 @@ public class Party {
             moveDown();
         }
         if (timePlaced > 0 && !grid.CanGoDown(getCurrentPiece())) {
-            if (time - timePlaced >= 10) {
+            if (time - timePlaced >= 1000) {
                 timePlaced = -1;
-                addScore(grid.putPiece(getCurrentPiece()));
+                int linesFulled = grid.putPiece(getCurrentPiece());
+                if (linesFulled > 0) {
+                    updateScoreLine(linesFulled, time);
+                }
                 updateNextPieces();
             }
         }
