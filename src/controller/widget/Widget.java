@@ -4,7 +4,7 @@ import view.theme.Theme;
 
 import java.awt.*;
 
-public abstract class Widget extends Canvas {
+public abstract class Widget {
 
         protected int propX;
         protected int propY;
@@ -12,7 +12,6 @@ public abstract class Widget extends Canvas {
         protected int propHeight;
 
         public Widget(int x, int y, int propWidth, int propHeight) {
-            super();
             this.propX = x;
             this.propY = y;
             this.propWidth = propWidth;

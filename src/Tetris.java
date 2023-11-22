@@ -7,6 +7,7 @@ import view.theme.ClassicTheme;
 import view.theme.Theme;
 
 import javax.swing.*;
+import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 
 public class Tetris {
@@ -23,6 +24,7 @@ public class Tetris {
                    display.widgets.add(backgroundWidget);
                    display.widgets.add(gridWidget);
                    Screen screen = new Screen(width, height, game);
+                   screen.setBackground(Color.BLACK);
                    screen.addDisplay(display);
                    screen.setVisible(true);
                }

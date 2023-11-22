@@ -63,11 +63,12 @@ public class ClassicTheme extends Theme {
         drawPiece(graphics, gridWidget, currentPiece, 255);
         drawPiece(graphics, gridWidget, gridWidget.getParty().getGhostPiece(), 100);
     }
-    
+
+    @Override
     public void drawBackground(Graphics graphics){
         graphics.setColor(Color.YELLOW);
-        graphics.fillRect( 0, 0, height , width);
-        
+        graphics.fillRect( 0, 0, width , height);
+
     }
 
     @Override

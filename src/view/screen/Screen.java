@@ -36,9 +36,10 @@ public class Screen extends JFrame implements Observer {
         public void addDisplay(Display display) {
             this.display = display;
             game.addObserver(this.display);
-            for (Widget widget : this.display.widgets) {
-                add(widget);
-            }
+            JPanel panel = new JPanel();
+            panel.setLayout(new BorderLayout());
+            panel.add(display, BorderLayout.CENTER);
+            setContentPane(panel);
             display.setDisplaySize(getWidth(), getHeight());
         }
 
@@ -48,9 +49,6 @@ public class Screen extends JFrame implements Observer {
             this.getContentPane().removeAll();
             this.display = display;
             game.addObserver(this.display);
-            for (Widget widget : this.display.widgets) {
-                add(widget);
-            }
             display.setDisplaySize(getWidth(), getHeight());
         }
 
