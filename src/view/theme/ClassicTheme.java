@@ -84,7 +84,10 @@ public class ClassicTheme extends Theme {
 
     @Override
     public void stopBackgroundMusic() {
-
+        if (backgroundMusic != null && backgroundMusic.isRunning()) {
+            backgroundMusic.stop();
+            backgroundMusic.close();
+        }
     }
 
 }
