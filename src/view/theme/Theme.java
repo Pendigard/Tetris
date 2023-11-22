@@ -6,11 +6,16 @@ import model.grid.Grid;
 import model.piece.Piece;
 
 import java.awt.*;
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+
 
 public abstract class Theme {
 
     protected int width = 0;
     protected int height = 0;
+    protected Clip backgroundMusic;
 
     public void setThemeSize(int width, int height) {
         this.width = width;
@@ -25,4 +30,10 @@ public abstract class Theme {
     public abstract void drawBlock(Graphics graphics, GridWidget gridWidget, Block block, int x, int y, int opacity);
 
     public abstract void drawPiece(Graphics graphics, GridWidget gridWidget, Piece piece, int opacity);
+
+    public abstract void playBackgroundMusic();
+
+    public abstract void stopBackgroundMusic();
+
+
 }

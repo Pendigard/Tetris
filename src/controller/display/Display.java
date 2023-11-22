@@ -25,6 +25,7 @@ public class Display implements Observer {
         this.theme = theme;
         this.width = 0;
         this.height = 0;
+        theme.playBackgroundMusic();
     }
 
     public Display(Theme theme, int width, int height) {
@@ -32,6 +33,7 @@ public class Display implements Observer {
         this.theme = theme;
         this.width = width;
         this.height = height;
+        theme.playBackgroundMusic();
     }
 
     public void setDisplaySize(int width, int height) {

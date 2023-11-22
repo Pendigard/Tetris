@@ -6,6 +6,9 @@ import model.block.BlockType;
 import model.grid.Grid;
 import model.piece.Piece;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.*;
 
 public class ClassicTheme extends Theme {
 
@@ -60,4 +63,28 @@ public class ClassicTheme extends Theme {
         drawPiece(graphics, gridWidget, currentPiece, 255);
         drawPiece(graphics, gridWidget, gridWidget.getParty().getGhostPiece(), 100);
     }
+
+    @Override
+    public void playBackgroundMusic() {
+        try {
+            File audioFile = new File("src/Tetris_base.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+            backgroundMusic = AudioSystem.getClip();
+            backgroundMusic.open(audioStream);
+
+            backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
+
+            backgroundMusic.start();
+
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void stopBackgroundMusic() {
+
+    }
+
 }
