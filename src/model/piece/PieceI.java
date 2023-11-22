@@ -29,6 +29,12 @@ public class PieceI extends Piece {
                         {new Block(BlockType.EMPTY), new Block(BlockType.EMPTY), new Block(BlockType.EMPTY), new Block(BlockType.EMPTY)},
                         {new Block(BlockType.CYAN), new Block(BlockType.CYAN), new Block(BlockType.CYAN), new Block(BlockType.CYAN)},
                         {new Block(BlockType.EMPTY), new Block(BlockType.EMPTY), new Block(BlockType.EMPTY), new Block(BlockType.EMPTY)}
+                },
+                {
+                        {new Block(BlockType.EMPTY), new Block(BlockType.CYAN), new Block(BlockType.EMPTY), new Block(BlockType.EMPTY)},
+                        {new Block(BlockType.EMPTY), new Block(BlockType.CYAN), new Block(BlockType.EMPTY), new Block(BlockType.EMPTY)},
+                        {new Block(BlockType.EMPTY), new Block(BlockType.CYAN), new Block(BlockType.EMPTY), new Block(BlockType.EMPTY)},
+                        {new Block(BlockType.EMPTY), new Block(BlockType.CYAN), new Block(BlockType.EMPTY), new Block(BlockType.EMPTY)}
                 }
         };
     }

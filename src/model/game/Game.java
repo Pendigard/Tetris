@@ -20,7 +20,10 @@ public class Game extends Observable implements Runnable {
         switch (keyEvent.getKeyCode()) {
             case KeyEvent.VK_LEFT -> party.moveLeft();
             case KeyEvent.VK_RIGHT -> party.moveRight();
-            case KeyEvent.VK_DOWN -> party.moveDown();
+            case KeyEvent.VK_DOWN -> {
+                party.moveDown();
+                party.addScore(1);
+            }
             case KeyEvent.VK_UP -> party.rotate();
             case KeyEvent.VK_SPACE -> party.hardDrop();
         }
