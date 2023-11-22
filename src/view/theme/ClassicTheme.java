@@ -67,7 +67,7 @@ public class ClassicTheme extends Theme {
     @Override
     public void playBackgroundMusic() {
         try {
-            File audioFile = new File("src/Tetris_base.wav");
+            File audioFile = new File("ressources/wav/Tetris_base.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
 
             backgroundMusic = AudioSystem.getClip();

@@ -131,7 +131,7 @@ public class Party {
         while (grid.CanGoDown(nextPieces[0])) {
             nextPieces[0].moveDown();
         }
-        grid.putPiece(nextPieces[0]);
+        addScore(grid.putPiece(getCurrentPiece()));
         updateNextPieces();
     }
 
@@ -153,12 +153,11 @@ public class Party {
         if (time - timeLastDrop >= getTimeInterval()) {
             timeLastDrop = time;
             moveDown();
-            addScore(grid.checkLine());
         }
         if (timePlaced > 0 && !grid.CanGoDown(getCurrentPiece())) {
             if (time - timePlaced >= 10) {
                 timePlaced = -1;
-                grid.putPiece(getCurrentPiece());
+                addScore(grid.putPiece(getCurrentPiece()));
                 updateNextPieces();
             }
         }

@@ -87,7 +87,7 @@ public class Grid {
         return true;
     }
 
-    public void putPiece(Piece p) {
+    public int putPiece(Piece p) {
         Block[][] piece = p.getBlocks();
 
         for (int i = 0; i < piece.length; i++) {
@@ -99,6 +99,7 @@ public class Grid {
 
             }
         }
+        return checkLine();
     }
 
     public int checkLine(){
