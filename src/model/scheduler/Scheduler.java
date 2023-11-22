@@ -7,8 +7,11 @@ public class Scheduler extends Thread {
         public Runnable runnable;
         private int tickElapsed = 0;
 
-        public Scheduler(Runnable runnable) {
+        private int refreshRate = 100;
+
+        public Scheduler(Runnable runnable, int refreshRate) {
             this.runnable = runnable;
+            this.refreshRate = refreshRate;
         }
 
         @Override
@@ -18,7 +21,7 @@ public class Scheduler extends Thread {
                     if (tickElapsed == 0)
                         Thread.sleep(1000); // At the beginning, we wait 1000ms for the window to be displayed
                     else
-                        Thread.sleep(100);
+                        Thread.sleep(refreshRate);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -27,7 +30,7 @@ public class Scheduler extends Thread {
             }
         }
 
-        public int getTickElapsed() {
-            return tickElapsed;
+        public int getMsElapsed() {
+            return tickElapsed*refreshRate;
         }
 }
