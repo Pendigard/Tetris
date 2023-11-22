@@ -26,6 +26,7 @@ public class Game extends Observable implements Runnable {
             }
             case KeyEvent.VK_UP -> party.rotate();
             case KeyEvent.VK_SPACE -> party.hardDrop();
+            case KeyEvent.VK_H -> party.holdPiece();
         }
     }
 

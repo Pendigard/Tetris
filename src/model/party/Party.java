@@ -17,6 +17,12 @@ public class Party {
     private Piece[] nextPieces = new Piece[5];
     private Grid grid = new Grid(20, 10);
 
+    private int time = 0;
+
+    private Piece holdPiece = null;
+
+    boolean holdUsed = false;
+
     public Party() {
         reset();
     }
@@ -109,7 +115,6 @@ public class Party {
     public void moveDown() {
         if (grid.CanGoDown(nextPieces[0]))
             nextPieces[0].moveDown();
-        else putPiece();
     }
 
     public void moveLeft() {
@@ -133,10 +138,22 @@ public class Party {
             nextPieces[0].moveDown();
             nbDrop++;
         }
-        addScore(grid.putPiece(getCurrentPiece()));
-        grid.putPiece(nextPieces[0]);
         addScore(nbDrop * 2);
-        updateNextPieces();
+        putPiece();
+    }
+
+    public void holdPiece() {
+        if (holdPiece == null) {
+            holdPiece = nextPieces[0];
+            updateNextPieces();
+            holdUsed = true;
+        } else {
+            if (holdUsed) return;
+            Piece tmp = holdPiece;
+            holdPiece = nextPieces[0];
+            nextPieces[0] = tmp;
+            holdUsed = true;
+        }
     }
 
     public int getTimeInterval() {
@@ -161,10 +178,10 @@ public class Party {
         };
     }
 
-    public void updateScoreLine(int linesFulled, int time) {
+    public void updateScoreLine(int linesFulled) {
         lines += linesFulled;
         score += convertLineToScore(linesFulled);
-        if (time - timeLastLine <= 500) {
+        if (this.time - timeLastLine <= 500) {
             combo++;
             score += combo * 50 * level;
         } else {
@@ -175,18 +192,15 @@ public class Party {
 
 
     public void update(int time) {
+        this.time = time;
         if (time - timeLastDrop >= getTimeInterval()) {
             timeLastDrop = time;
             moveDown();
         }
         if (timePlaced > 0 && !grid.CanGoDown(getCurrentPiece())) {
-            if (time - timePlaced >= 1000) {
+            if (time - timePlaced >= 500) {
                 timePlaced = -1;
-                int linesFulled = grid.putPiece(getCurrentPiece());
-                if (linesFulled > 0) {
-                    updateScoreLine(linesFulled, time);
-                }
-                updateNextPieces();
+                putPiece();
             }
         }
         else if (!grid.CanGoDown(getCurrentPiece())) {
@@ -198,7 +212,11 @@ public class Party {
     }
 
     public void putPiece(){
-        grid.putPiece(nextPieces[0]);
+        holdUsed = false;
+        int linesFulled = grid.putPiece(getCurrentPiece());
+        if (linesFulled > 0) {
+            updateScoreLine(linesFulled);
+        }
         updateNextPieces();
     }
 

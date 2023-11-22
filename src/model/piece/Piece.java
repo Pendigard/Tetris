@@ -9,10 +9,8 @@ public abstract class Piece implements Cloneable {
     private int y;
 
     public Piece() {
-        x = 5;
-        y = 0;
-        rotation = 0;
         initBlocks();
+        resetPosition();
     }
 
     abstract public void initBlocks();
@@ -61,6 +59,13 @@ public abstract class Piece implements Cloneable {
             }
             System.out.println();
         }
+    }
+
+    public void resetPosition() {
+        int len = blocks[rotation].length;
+        x = (10 - len) / 2;
+        y = 0;
+        int rotation = 0;
     }
 
     @Override
