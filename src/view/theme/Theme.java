@@ -31,6 +31,8 @@ public abstract class Theme {
 
     public abstract void drawPiece(Graphics graphics, GridWidget gridWidget, Piece piece, int opacity);
 
+    public abstract void drawBackground(Graphics graphics);
+
     public abstract void playBackgroundMusic();
 
     public abstract void stopBackgroundMusic();
