@@ -128,10 +128,13 @@ public class Party {
     }
 
     public void hardDrop() {
+        int nbDrop = 0;
         while (grid.CanGoDown(nextPieces[0])) {
             nextPieces[0].moveDown();
+            nbDrop++;
         }
         grid.putPiece(nextPieces[0]);
+        addScore(nbDrop * 2);
         updateNextPieces();
     }
 
