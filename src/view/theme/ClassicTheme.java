@@ -22,7 +22,7 @@ public class ClassicTheme extends Theme {
             case PURPLE -> Color.MAGENTA;
             case RED -> Color.RED;
             case CYAN -> Color.CYAN;
-            default -> Color.BLACK;
+            default -> new Color(10, 39, 66, 255);
         };
     }
 
@@ -54,6 +54,8 @@ public class ClassicTheme extends Theme {
 
     @Override
     public void drawGrid(Graphics graphics, GridWidget gridWidget, Grid grid, Piece currentPiece) {
+        Color borderColor = new Color(10, 39, 66, 255);
+        drawGridBorder(graphics, gridWidget, 5, borderColor);
         for (int i = 0; i < grid.getNbRows(); i++) {
             for (int j = 0; j < grid.getNbColumns(); j++) {
                 Block block = grid.getBlock(i, j);
@@ -66,7 +68,8 @@ public class ClassicTheme extends Theme {
 
     @Override
     public void drawBackground(Graphics graphics){
-        graphics.setColor(Color.YELLOW);
+        Color color = new Color(82, 125, 153, 255);
+        graphics.setColor(color);
         graphics.fillRect( 0, 0, width , height);
 
     }

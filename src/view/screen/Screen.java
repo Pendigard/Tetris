@@ -29,6 +29,13 @@ public class Screen extends JFrame implements Observer {
                     game.keyPressed(e);
                 }
             });
+
+            addComponentListener(new java.awt.event.ComponentAdapter() {
+                public void componentResized(java.awt.event.ComponentEvent evt) {
+                    if (display != null)
+                        display.setDisplaySize(getWidth(), getHeight());
+                }
+            });
             this.game.addObserver(this);
         }
 

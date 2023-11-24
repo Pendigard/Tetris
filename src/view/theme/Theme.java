@@ -33,6 +33,15 @@ public abstract class Theme {
 
     public abstract void drawBackground(Graphics graphics);
 
+    public void drawGridBorder(Graphics graphics, GridWidget gridWidget, int propSize, Color color) {
+        int borderHeight = (int)((gridWidget.getPropHeight()+propSize)/100.0 * height);
+        int borderWidth = (int)(borderHeight/gridWidget.getParty().getGrid().getNbRows() * gridWidget.getParty().getGrid().getNbColumns() + (propSize/2.0)/100.0 * width);
+        int borderX = (int)((gridWidget.getPropX()-propSize/2)/100.0 * width);
+        int borderY = (int)((gridWidget.getPropY()-propSize/2)/100.0 * height);
+        graphics.setColor(color);
+        graphics.fillRoundRect(borderX, borderY, borderWidth, borderHeight, 10, 10);
+    }
+
     public abstract void playBackgroundMusic();
 
     public abstract void stopBackgroundMusic();
