@@ -19,7 +19,7 @@ public class Scheduler extends Thread {
             while(true) {
                 try {
                     if (tickElapsed == 0)
-                        Thread.sleep(1000); // At the beginning, we wait 1000ms for the window to be displayed
+                        Thread.sleep(3000); // At the beginning, we wait 3000ms for the window to be displayed
                     else
                         Thread.sleep(refreshRate);
                 } catch (InterruptedException e) {

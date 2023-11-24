@@ -181,7 +181,7 @@ public class Party {
     public void updateScoreLine(int linesFulled) {
         lines += linesFulled;
         score += convertLineToScore(linesFulled);
-        if (this.time - timeLastLine <= 500) {
+        if (this.time - timeLastLine <= 5000) {
             combo++;
             score += combo * 50 * level;
         } else {
@@ -190,9 +190,14 @@ public class Party {
         timeLastLine = time;
     }
 
+    private void updateLevel() {
+        level = lines/10;
+    }
+
 
     public void update(int time) {
         this.time = time;
+        updateLevel();
         if (time - timeLastDrop >= getTimeInterval()) {
             timeLastDrop = time;
             moveDown();

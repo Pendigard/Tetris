@@ -1,7 +1,6 @@
 package view.screen;
 
 import controller.display.Display;
-import controller.widget.Widget;
 import model.game.Game;
 
 import javax.swing.*;
