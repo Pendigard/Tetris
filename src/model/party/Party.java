@@ -154,6 +154,7 @@ public class Party {
             nextPieces[0] = tmp;
             holdUsed = true;
         }
+        holdPiece.resetPosition();
     }
 
     public int getTimeInterval() {

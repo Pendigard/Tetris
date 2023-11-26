@@ -13,6 +13,10 @@ import javax.sound.sampled.*;
 
 public class ClassicTheme extends Theme {
 
+    private static final Color BACKGROUND_COLOR = new Color(86, 151, 238, 255);
+
+    private static final Color GRID_COLOR = new Color(5, 2, 49, 255);
+
     @Override
     public Color getColor(Block block) {
         return switch (block.getType()) {
@@ -23,17 +27,18 @@ public class ClassicTheme extends Theme {
             case PURPLE -> Color.MAGENTA;
             case RED -> Color.RED;
             case CYAN -> Color.CYAN;
-            default -> new Color(10, 39, 66, 255);
+            default -> GRID_COLOR;
         };
     }
 
     @Override
-    public void drawBlock(Graphics graphics, Block block, int blockSize, int x, int y, int opacity) {
+    public void drawBlock(Graphics graphics, Block block, int borderSize, int x, int y, int opacity) {
         Color color = getColor(block);
+        int blockSize = borderSize - borderSize/10;
+        graphics.setColor(GRID_COLOR);
+        graphics.fillRect(x, y, borderSize, borderSize);
         graphics.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity));
-        graphics.fillRect( x, y, blockSize, blockSize);
-        graphics.setColor(Color.BLACK);
-        graphics.drawRect(x, y, blockSize, blockSize);
+        graphics.fillRect( x+borderSize/20, y+borderSize/20, blockSize, blockSize);
     }
 
     @Override
@@ -54,35 +59,37 @@ public class ClassicTheme extends Theme {
         Piece piece = heldPieceWidget.getParty().getHeldPiece();
         int x = heldPieceWidget.getRealX(width);
         int y = heldPieceWidget.getRealY(height);
+        int widgetWidth = heldPieceWidget.getRealHeight(height);
+        int widgetHeight = heldPieceWidget.getRealHeight(height);
+        graphics.setColor(GRID_COLOR);
+        graphics.fillRoundRect(x, y, widgetWidth, widgetHeight, 10, 10);
         if (piece != null) {
-            int blockSize = heldPieceWidget.getRealHeight(height) / piece.getBlocks().length;
-            drawPiece(graphics, blockSize, x, y, piece, opacity);
+            int blockSize = widgetHeight/5;
+            int pieceX = x + widgetWidth/2 - piece.getBlocks()[0].length*blockSize/2;
+            int pieceY = y + widgetHeight/2 - piece.getBlocks().length*blockSize/2;
+            drawPiece(graphics, blockSize, pieceX, pieceY, piece, opacity);
         }
     }
 
 
     @Override
     public void drawGrid(Graphics graphics, GridWidget gridWidget, Grid grid, Piece currentPiece) {
-        Color borderColor = new Color(10, 39, 66, 255);
         int x = gridWidget.getRealX(width);
         int y = gridWidget.getRealY(height);
         int blockSize = gridWidget.getRealHeight(height)/gridWidget.getParty().getGrid().getNbRows();
-        drawGridBorder(graphics, gridWidget, 5, borderColor);
         for (int i = 0; i < grid.getNbRows(); i++) {
             for (int j = 0; j < grid.getNbColumns(); j++) {
                 Block block = grid.getBlock(i, j);
                 drawBlock(graphics, block, blockSize, x+j*blockSize, y+i*blockSize, 255);
             }
-        }
-        drawPiece(graphics, blockSize, x + currentPiece.getX() * blockSize, y + currentPiece.getY() * blockSize, currentPiece, 255);
-        Piece ghostPiece = gridWidget.getParty().getGhostPiece();
+        }        Piece ghostPiece = gridWidget.getParty().getGhostPiece();
         drawPiece(graphics, blockSize, x + ghostPiece.getX() * blockSize, y + ghostPiece.getY() * blockSize, ghostPiece, 100);
+        drawPiece(graphics, blockSize, x + currentPiece.getX() * blockSize, y + currentPiece.getY() * blockSize, currentPiece, 255);
     }
 
     @Override
     public void drawBackground(Graphics graphics){
-        Color color = new Color(82, 125, 153, 255);
-        graphics.setColor(color);
+        graphics.setColor(BACKGROUND_COLOR);
         graphics.fillRect( 0, 0, width , height);
          /*
         Image background = Toolkit.getDefaultToolkit().getImage("ressources/images/background/city.jpg");

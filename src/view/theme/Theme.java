@@ -37,6 +37,7 @@ public abstract class Theme {
 
     public abstract void drawHeldPiece(Graphics graphics, HeldPieceWidget heldPieceWidget, int opacity);
 
+    /*
     public void drawGridBorder(Graphics graphics, GridWidget gridWidget, int propSize, Color color) {
         int borderHeight = (int)((gridWidget.getPropHeight()+propSize)/100.0 * height);
         int borderWidth = (int)(borderHeight/gridWidget.getParty().getGrid().getNbRows() * gridWidget.getParty().getGrid().getNbColumns() + (propSize/2.0)/100.0 * width);
@@ -45,6 +46,7 @@ public abstract class Theme {
         graphics.setColor(color);
         graphics.fillRoundRect(borderX, borderY, borderWidth, borderHeight, 10, 10);
     }
+    */
 
     public abstract void playBackgroundMusic();
 
