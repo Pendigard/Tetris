@@ -198,6 +198,9 @@ public class Party {
     public void update(int time) {
         this.time = time;
         updateLevel();
+        if (!grid.isValidPosition(getCurrentPiece())) {
+            reset();
+        }
         if (time - timeLastDrop >= getTimeInterval()) {
             timeLastDrop = time;
             moveDown();

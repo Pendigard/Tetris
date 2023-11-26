@@ -1,6 +1,7 @@
 package view.theme;
 
 import controller.widget.GridWidget;
+import controller.widget.HeldPieceWidget;
 import model.block.Block;
 import model.block.BlockType;
 import model.grid.Grid;
@@ -51,6 +52,19 @@ public class ClassicTheme extends Theme {
 
     }
 
+    @Override
+    public void drawHeldPiece(Graphics graphics, HeldPieceWidget gridWidget, Piece piece, int opacity) {
+        Block[][] blocks = piece.getBlocks();
+        for (int i = 0; i < blocks.length; i++) {
+            for (int j = 0; j < blocks[i].length; j++) {
+                if (blocks[i][j].getType() != BlockType.EMPTY) {
+                    //drawBlock(graphics, gridWidget, blocks[i][j], piece.getX() + j, piece.getY() + i, opacity);
+                }
+            }
+        }
+
+    }
+
 
     @Override
     public void drawGrid(Graphics graphics, GridWidget gridWidget, Grid grid, Piece currentPiece) {
@@ -71,7 +85,10 @@ public class ClassicTheme extends Theme {
         Color color = new Color(82, 125, 153, 255);
         graphics.setColor(color);
         graphics.fillRect( 0, 0, width , height);
-
+         /*
+        Image background = Toolkit.getDefaultToolkit().getImage("ressources/images/background/city.jpg");
+        graphics.drawImage(background, 0, 0, width, height, null);
+            */
     }
 
     @Override

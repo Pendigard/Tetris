@@ -1,6 +1,8 @@
 package view.theme;
 
 import controller.widget.GridWidget;
+import controller.widget.HeldPieceWidget;
+import controller.widget.HeldPieceWidget;
 import model.block.Block;
 import model.grid.Grid;
 import model.piece.Piece;
@@ -32,6 +34,8 @@ public abstract class Theme {
     public abstract void drawPiece(Graphics graphics, GridWidget gridWidget, Piece piece, int opacity);
 
     public abstract void drawBackground(Graphics graphics);
+
+    public abstract void drawHeldPiece(Graphics graphics, HeldPieceWidget gridWidget, Piece piece, int opacity);
 
     public void drawGridBorder(Graphics graphics, GridWidget gridWidget, int propSize, Color color) {
         int borderHeight = (int)((gridWidget.getPropHeight()+propSize)/100.0 * height);
