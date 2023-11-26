@@ -29,13 +29,13 @@ public abstract class Theme {
 
     public abstract Color getColor(Block block);
 
-    public abstract void drawBlock(Graphics graphics, GridWidget gridWidget, Block block, int x, int y, int opacity);
+    public abstract void drawBlock(Graphics graphics, Block block, int blockSize, int x, int y, int opacity);
 
-    public abstract void drawPiece(Graphics graphics, GridWidget gridWidget, Piece piece, int opacity);
+    public abstract void drawPiece(Graphics graphics, int blockSize, int x, int y, Piece piece, int opacity);
 
     public abstract void drawBackground(Graphics graphics);
 
-    public abstract void drawHeldPiece(Graphics graphics, HeldPieceWidget gridWidget, Piece piece, int opacity);
+    public abstract void drawHeldPiece(Graphics graphics, HeldPieceWidget heldPieceWidget, int opacity);
 
     public void drawGridBorder(Graphics graphics, GridWidget gridWidget, int propSize, Color color) {
         int borderHeight = (int)((gridWidget.getPropHeight()+propSize)/100.0 * height);

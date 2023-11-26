@@ -17,6 +17,6 @@ public class HeldPieceWidget extends PartyWidget {
 
     @Override
     public void paint(Graphics g, Theme theme) {
-
+        theme.drawHeldPiece(g, this, 255);
     }
 }

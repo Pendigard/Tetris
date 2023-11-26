@@ -28,24 +28,21 @@ public class ClassicTheme extends Theme {
     }
 
     @Override
-    public void drawBlock(Graphics graphics, GridWidget gridWidget, Block block, int x, int y, int opacity) {
+    public void drawBlock(Graphics graphics, Block block, int blockSize, int x, int y, int opacity) {
         Color color = getColor(block);
         graphics.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity));
-        double realX = gridWidget.getPropX()/100.0 * width;
-        double realY = gridWidget.getPropY()/100.0 * height;
-        double realCellSize = (gridWidget.getPropHeight()/100.0 * height)/gridWidget.getParty().getGrid().getNbRows();
-        graphics.fillRect( (int)realX + x * (int)realCellSize, (int)realY + y * (int)realCellSize, (int)realCellSize, (int)realCellSize);
+        graphics.fillRect( x, y, blockSize, blockSize);
         graphics.setColor(Color.BLACK);
-        graphics.drawRect((int)realX + x * (int)realCellSize, (int)realY + y * (int)realCellSize, (int)realCellSize, (int)realCellSize);
+        graphics.drawRect(x, y, blockSize, blockSize);
     }
 
     @Override
-    public void drawPiece(Graphics graphics, GridWidget gridWidget, Piece piece, int opacity) {
+    public void drawPiece(Graphics graphics, int blockSize, int x, int y, Piece piece, int opacity) {
         Block[][] blocks = piece.getBlocks();
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
                 if (blocks[i][j].getType() != BlockType.EMPTY) {
-                    drawBlock(graphics, gridWidget, blocks[i][j], piece.getX() + j, piece.getY() + i, opacity);
+                    drawBlock(graphics, blocks[i][j], blockSize, x + j * blockSize, y + i * blockSize, opacity);
                 }
             }
         }
@@ -53,31 +50,33 @@ public class ClassicTheme extends Theme {
     }
 
     @Override
-    public void drawHeldPiece(Graphics graphics, HeldPieceWidget gridWidget, Piece piece, int opacity) {
-        Block[][] blocks = piece.getBlocks();
-        for (int i = 0; i < blocks.length; i++) {
-            for (int j = 0; j < blocks[i].length; j++) {
-                if (blocks[i][j].getType() != BlockType.EMPTY) {
-                    //drawBlock(graphics, gridWidget, blocks[i][j], piece.getX() + j, piece.getY() + i, opacity);
-                }
-            }
+    public void drawHeldPiece(Graphics graphics, HeldPieceWidget heldPieceWidget, int opacity) {
+        Piece piece = heldPieceWidget.getParty().getHeldPiece();
+        int x = heldPieceWidget.getRealX(width);
+        int y = heldPieceWidget.getRealY(height);
+        if (piece != null) {
+            int blockSize = heldPieceWidget.getRealHeight(height) / piece.getBlocks().length;
+            drawPiece(graphics, blockSize, x, y, piece, opacity);
         }
-
     }
 
 
     @Override
     public void drawGrid(Graphics graphics, GridWidget gridWidget, Grid grid, Piece currentPiece) {
         Color borderColor = new Color(10, 39, 66, 255);
+        int x = gridWidget.getRealX(width);
+        int y = gridWidget.getRealY(height);
+        int blockSize = gridWidget.getRealHeight(height)/gridWidget.getParty().getGrid().getNbRows();
         drawGridBorder(graphics, gridWidget, 5, borderColor);
         for (int i = 0; i < grid.getNbRows(); i++) {
             for (int j = 0; j < grid.getNbColumns(); j++) {
                 Block block = grid.getBlock(i, j);
-                drawBlock(graphics, gridWidget, block, j, i, 255);
+                drawBlock(graphics, block, blockSize, x+j*blockSize, y+i*blockSize, 255);
             }
         }
-        drawPiece(graphics, gridWidget, currentPiece, 255);
-        drawPiece(graphics, gridWidget, gridWidget.getParty().getGhostPiece(), 100);
+        drawPiece(graphics, blockSize, x + currentPiece.getX() * blockSize, y + currentPiece.getY() * blockSize, currentPiece, 255);
+        Piece ghostPiece = gridWidget.getParty().getGhostPiece();
+        drawPiece(graphics, blockSize, x + ghostPiece.getX() * blockSize, y + ghostPiece.getY() * blockSize, ghostPiece, 100);
     }
 
     @Override

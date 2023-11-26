@@ -168,6 +168,10 @@ public class Party {
         return ghostPiece;
     }
 
+    public Piece getHeldPiece() {
+        return holdPiece;
+    }
+
     public int convertLineToScore(int lines) {
         return switch (lines) {
             case 1 -> 100 * level;
