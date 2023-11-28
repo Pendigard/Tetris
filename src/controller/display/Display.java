@@ -2,11 +2,14 @@ package controller.display;
 
 import controller.widget.Widget;
 import model.game.Game;
+import view.theme.ClassicTheme;
 import view.theme.SynthwaveTheme;
 import view.theme.Theme;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.Observable;

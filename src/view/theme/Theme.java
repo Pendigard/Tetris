@@ -3,12 +3,14 @@ package view.theme;
 import controller.widget.GridWidget;
 import controller.widget.HeldPieceWidget;
 import controller.widget.HeldPieceWidget;
+import controller.widget.NextPieceWidget;
 import model.block.Block;
 import model.block.BlockType;
 import model.grid.Grid;
 import model.piece.Piece;
 
 import java.awt.*;
+import javax.naming.NamingException;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
@@ -58,15 +60,23 @@ public abstract class Theme {
 
     public abstract void drawBlock(Graphics graphics, Block block, int blockSize, int x, int y, int opacity);
 
-    public void drawPiece(Graphics graphics, int blockSize, int x, int y, Piece piece, int opacity) {
-        Block[][] blocks = piece.getBlocks();
+    private void drawPieceBlocks(Graphics graphics, Block[][] blocks, int blockSize, int x, int y, int opacity) {
         for (int i = 0; i < blocks.length; i++) {
-            for (int j = 0; j < blocks[i].length; j++) {
-                if (blocks[i][j].getType() != BlockType.EMPTY) {
+            for (int j = 0; j < blocks[0].length; j++) {
+                if (blocks[i][j].getType() != BlockType.EMPTY)
                     drawBlock(graphics, blocks[i][j], blockSize, x + j * blockSize, y + i * blockSize, opacity);
-                }
             }
         }
+    }
+
+    public void drawPiece(Graphics graphics, int blockSize, int x, int y, Piece piece, int opacity) {
+        Block[][] blocks = piece.getBlocks();
+        drawPieceBlocks(graphics, blocks, blockSize, x, y, opacity);
+    }
+
+    public void drawBoundingPiece(Graphics graphics, int blockSize, int x, int y, Piece piece, int opacity) {
+        Block[][] blocks = piece.getPieceBoundingBox();
+        drawPieceBlocks(graphics, blocks, blockSize, x, y, opacity);
     }
 
     public abstract void drawBox(Graphics graphics, int x, int y, int width, int height, int opacity);
@@ -81,10 +91,28 @@ public abstract class Theme {
         int widgetHeight = heldPieceWidget.getRealHeight(height);
         drawBox(graphics, x, y, widgetWidth, widgetHeight, opacity);
         if (piece != null) {
-            int blockSize = widgetHeight/5;
-            int pieceX = x + widgetWidth/2 - piece.getBlocks()[0].length*blockSize/2;
-            int pieceY = y + widgetHeight/2 - piece.getBlocks().length*blockSize/2;
-            drawPiece(graphics, blockSize, pieceX, pieceY, piece, opacity);
+            int blockSize = widgetHeight/6;
+            int nbrBlocksX = piece.getPieceBoundingBox()[0].length;
+            int nbrBlocksY = piece.getPieceBoundingBox().length;
+            int pieceX = x + blockSize + (int)((4-nbrBlocksX)*blockSize*0.5); // To center the piece
+            int pieceY = y + blockSize + (int)((4-nbrBlocksY)*blockSize*0.5);
+            drawBoundingPiece(graphics, blockSize, pieceX, pieceY, piece, opacity);
+        }
+    }
+
+    public void drawNextPiece(Graphics graphics, NextPieceWidget nextPieceWidget) {
+        int x = nextPieceWidget.getRealX(width);
+        int y = nextPieceWidget.getRealY(height);
+        int widgetWidth = nextPieceWidget.getRealHeight(height);
+        int widgetHeight = nextPieceWidget.getRealWidth(width);
+        drawBox(graphics, x, y, widgetWidth, widgetHeight, 255);
+        Piece[] nextPieces = nextPieceWidget.getParty().getNextPieces();
+        int blockSize = widgetWidth/6;
+        for (int i = 0; i < 3; i++) {
+            int nbrBlocksX = nextPieces[i+1].getPieceBoundingBox()[0].length;
+            int pieceX = x + blockSize + (int)((4-nbrBlocksX)*blockSize*0.5); // To center the piece
+            int pieceY = y + blockSize + i*blockSize*4;
+            drawBoundingPiece(graphics, blockSize, pieceX, pieceY, nextPieces[i+1], 255);
         }
     }
 

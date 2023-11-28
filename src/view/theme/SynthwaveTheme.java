@@ -26,20 +26,11 @@ public class SynthwaveTheme extends Theme{
         };
     }
 
-    private void drawNeonBorder(Graphics graphics, int x, int y, int width, int height, Color color) {
-        drawRectBorderSize(graphics, x-4, y, width+8, height+8, 4, new Color(255, 255, 255));
-        for (int i = 0; i < 5; i++) {
-            graphics.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), 255 - i * 50));
-            graphics.drawRect(x + i, y + i, width - i * 2, height - i * 2);
-        }
-    }
-
     @Override
     public void drawGrid(Graphics graphics, GridWidget gridWidget, Grid grid, Piece currentPiece) {
         int x = gridWidget.getRealX(width);
         int y = gridWidget.getRealY(height);
         int blockSize = gridWidget.getRealHeight(height)/gridWidget.getParty().getGrid().getNbRows();
-        //drawNeonBorder(graphics, x, y, grid.getNbColumns()*blockSize, grid.getNbRows()*blockSize, new Color(0, 238, 255, 255));
         for (int i = 0; i < grid.getNbRows(); i++) {
             for (int j = 0; j < grid.getNbColumns(); j++) {
                 Block block = grid.getBlock(i, j);

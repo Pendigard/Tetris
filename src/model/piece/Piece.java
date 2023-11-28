@@ -1,6 +1,7 @@
 package model.piece;
 
 import model.block.Block;
+import model.block.BlockType;
 
 public abstract class Piece implements Cloneable {
     public Block[][][] blocks; // rotation, x, y
@@ -50,6 +51,38 @@ public abstract class Piece implements Cloneable {
 
     public Block[][] getBlocks() {
         return blocks[rotation];
+    }
+
+    public Block[][] getPieceBoundingBox() { // Returns the smallest rectangle containing the piece
+        int xMin = blocks[rotation].length - 1;
+        int xMax = 0;
+        int yMin = blocks[rotation][0].length -1;
+        int yMax = 0;
+        for (int i = 0; i < blocks[rotation].length; i++) {
+            for (int j = 0; j < blocks[rotation][i].length; j++) {
+                if (blocks[rotation][i][j].getType() != BlockType.EMPTY) {
+                    if (i < xMin) {
+                        xMin = i;
+                    }
+                    if (i > xMax) {
+                        xMax = i;
+                    }
+                    if (j < yMin) {
+                        yMin = j;
+                    }
+                    if (j > yMax) {
+                        yMax = j;
+                    }
+                }
+            }
+        }
+        Block[][] pieceBoundingBox = new Block[xMax-xMin+1][yMax-yMin+1];
+        for (int i = xMin; i <= xMax; i++) {
+            for (int j = yMin; j <= yMax; j++) {
+                pieceBoundingBox[i-xMin][j-yMin] = blocks[rotation][i][j];
+            }
+        }
+        return pieceBoundingBox;
     }
 
     public void print() {
