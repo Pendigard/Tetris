@@ -5,6 +5,7 @@ import controller.widget.HeldPieceWidget;
 import model.game.Game;
 import view.screen.Screen;
 import view.theme.ClassicTheme;
+import view.theme.SynthwaveTheme;
 import view.theme.Theme;
 
 import javax.swing.*;

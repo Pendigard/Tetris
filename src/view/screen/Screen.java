@@ -2,6 +2,8 @@ package view.screen;
 
 import controller.display.Display;
 import model.game.Game;
+import view.theme.ClassicTheme;
+import view.theme.SynthwaveTheme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +28,12 @@ public class Screen extends JFrame implements Observer {
                 @Override
                 public void keyPressed(KeyEvent e) { //évènement clavier : object contrôleur qui réceptionne
                     super.keyPressed(e);
+                    if (e.getKeyCode() == KeyEvent.VK_S) {
+                        if (display.getTheme().getClass() == SynthwaveTheme.class)
+                            display.changeTheme(new ClassicTheme());
+                        else
+                            display.changeTheme(new SynthwaveTheme());
+                    }
                     game.keyPressed(e);
                 }
             });

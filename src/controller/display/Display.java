@@ -2,6 +2,7 @@ package controller.display;
 
 import controller.widget.Widget;
 import model.game.Game;
+import view.theme.SynthwaveTheme;
 import view.theme.Theme;
 
 import javax.swing.*;
@@ -65,4 +66,14 @@ public class Display extends Canvas implements Observer {
         bs.show();
     }
 
+    public void changeTheme(Theme newTheme) {
+        theme.stopBackgroundMusic();
+        theme = newTheme;
+        theme.playBackgroundMusic();
+        theme.setThemeSize(width, height);
+    }
+
+    public Theme getTheme() {
+        return theme;
+    }
 }
