@@ -11,6 +11,7 @@ public class Party {
     private int level;
     private int lines;
     private int combo = 0;
+    private boolean isAlive = true;
     private int timeLastDrop = 0;
     private int timeLastLine = 0;
     private int timePlaced = -1;
@@ -73,6 +74,8 @@ public class Party {
         initNextPieces();
         holdPiece = null;
         grid.reset();
+        holdPiece = null;
+        isAlive = true;
     }
 
     private Piece getRandPiece() {
@@ -91,6 +94,8 @@ public class Party {
     public Piece getCurrentPiece() {
         return nextPieces[0];
     }
+
+    public boolean getAlive(){ return isAlive; }
 
     public void initNextPieces() {
         for (int i = 0; i < nextPieces.length; i++) {
@@ -204,28 +209,30 @@ public class Party {
         level = lines/10 + 1;
     }
 
+    private void gameOver(){
 
+    }
     public void update(int time) {
         this.time = time;
         updateLevel();
         if (!grid.isValidPosition(getCurrentPiece())) {
-            reset();
+            isAlive = false;
         }
-        if (time - timeLastDrop >= getTimeInterval()) {
-            timeLastDrop = time;
-            moveDown();
-        }
-        if (timePlaced > 0 && !grid.CanGoDown(getCurrentPiece())) {
-            if (time - timePlaced >= 500) {
-                timePlaced = -1;
-                putPiece();
+        if(isAlive) {
+            if (time - timeLastDrop >= getTimeInterval()) {
+                timeLastDrop = time;
+                moveDown();
             }
-        }
-        else if (!grid.CanGoDown(getCurrentPiece())) {
-            timePlaced = time;
-        }
-        else {
-            timePlaced = -1;
+            if (timePlaced > 0 && !grid.CanGoDown(getCurrentPiece())) {
+                if (time - timePlaced >= 500) {
+                    timePlaced = -1;
+                    putPiece();
+                }
+            } else if (!grid.CanGoDown(getCurrentPiece())) {
+                timePlaced = time;
+            } else {
+                timePlaced = -1;
+            }
         }
     }
 

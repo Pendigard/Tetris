@@ -9,7 +9,7 @@ import java.util.Observable;
 
 public class Game extends Observable implements Runnable {
 
-    private Scheduler scheduler = new Scheduler(this, 10);
+    private Scheduler scheduler = new Scheduler(this, 50);
     public Party party = new Party();
 
     public Game() {
@@ -17,6 +17,7 @@ public class Game extends Observable implements Runnable {
     }
 
     public void keyPressed(KeyEvent keyEvent) {
+<<<<<<< HEAD
         switch (keyEvent.getKeyCode()) {
             case KeyEvent.VK_LEFT -> party.moveLeft();
             case KeyEvent.VK_RIGHT -> party.moveRight();
@@ -24,10 +25,22 @@ public class Game extends Observable implements Runnable {
                 party.moveDown();
                 if (party.canMoveDown())
                     party.addScore(1);
+=======
+        if(party.getAlive()) {
+            switch (keyEvent.getKeyCode()) {
+                case KeyEvent.VK_LEFT -> party.moveLeft();
+                case KeyEvent.VK_RIGHT -> party.moveRight();
+                case KeyEvent.VK_DOWN -> {
+                    party.moveDown();
+                    party.addScore(1);
+                }
+                case KeyEvent.VK_UP -> party.rotate();
+                case KeyEvent.VK_SPACE -> party.hardDrop();
+                case KeyEvent.VK_H -> party.holdPiece();
+>>>>>>> c897df99d596a64c99cdd7307229e7b41ebfc310
             }
-            case KeyEvent.VK_UP -> party.rotate();
-            case KeyEvent.VK_SPACE -> party.hardDrop();
-            case KeyEvent.VK_H -> party.holdPiece();
+        }else{
+            if(keyEvent.getKeyCode() == KeyEvent.VK_SPACE) party.reset();
         }
     }
 
