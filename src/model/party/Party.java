@@ -158,7 +158,7 @@ public class Party {
     }
 
     public int getTimeInterval() {
-        return 1000 - (level - 1) * 100;
+        return Math.max(500 - level * level,1);
     }
 
     public Piece getGhostPiece() {
