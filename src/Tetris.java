@@ -8,9 +8,17 @@ import view.theme.Theme;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 public class Tetris {
+
+    public void loadFonts() throws IOException, FontFormatException {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Font vcr_osd_mono = Font.createFont(Font.TRUETYPE_FONT, new File("resources/fonts/vcr_osd_mono.ttf"));
+        ge.registerFont(vcr_osd_mono);
+    }
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
         SwingUtilities.invokeAndWait(new Runnable() {
                public void run() {
