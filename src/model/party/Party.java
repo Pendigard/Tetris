@@ -196,7 +196,7 @@ public class Party {
     }
 
     private void updateLevel() {
-        level = lines/10;
+        level = lines/10 + 1;
     }
 
 
