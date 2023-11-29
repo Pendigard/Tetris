@@ -79,7 +79,7 @@ public abstract class Theme {
 
     public abstract void drawBox(Graphics graphics, int x, int y, int width, int height, int opacity);
 
-    public abstract void drawText(Graphics graphics, int x,int y,int size);
+    public abstract void drawText(Graphics graphics, int x,int y,String txt);
 
     public abstract void drawBackground(Graphics graphics);
 
@@ -89,6 +89,7 @@ public abstract class Theme {
         int widgetWidth = infoWidget.getRealHeight(height);
         int widgetHeight = infoWidget.getRealWidth(width);
         drawBox(graphics, x, y, widgetWidth, widgetHeight, 255);
+        drawText(graphics,x,y,"test");
     }
 
     public void drawHeldPiece(Graphics graphics, HeldPieceWidget heldPieceWidget, int opacity) {
@@ -124,9 +125,20 @@ public abstract class Theme {
         }
     }
 
+    public abstract void loadTheme();
+
     public abstract void playBackgroundMusic();
 
     public abstract void stopBackgroundMusic();
+
+    public Image loadImage(String path){
+        return Toolkit.getDefaultToolkit().getImage(path);
+    }
+
+    public void loadFont(String path) throws IOException, FontFormatException {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(path)));
+    }
 
 
 }
