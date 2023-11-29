@@ -1,9 +1,7 @@
 package view.theme;
 
-import controller.widget.GridWidget;
+import controller.widget.*;
 import controller.widget.HeldPieceWidget;
-import controller.widget.HeldPieceWidget;
-import controller.widget.NextPieceWidget;
 import model.block.Block;
 import model.block.BlockType;
 import model.grid.Grid;
@@ -81,7 +79,17 @@ public abstract class Theme {
 
     public abstract void drawBox(Graphics graphics, int x, int y, int width, int height, int opacity);
 
+    public abstract void drawText(Graphics graphics, int x,int y,int size);
+
     public abstract void drawBackground(Graphics graphics);
+
+    public void drawInfo(Graphics graphics, InfoWidget infoWidget){
+        int x = infoWidget.getRealX(width);
+        int y = infoWidget.getRealY(height);
+        int widgetWidth = infoWidget.getRealHeight(height);
+        int widgetHeight = infoWidget.getRealWidth(width);
+        drawBox(graphics, x, y, widgetWidth, widgetHeight, 255);
+    }
 
     public void drawHeldPiece(Graphics graphics, HeldPieceWidget heldPieceWidget, int opacity) {
         Piece piece = heldPieceWidget.getParty().getHeldPiece();

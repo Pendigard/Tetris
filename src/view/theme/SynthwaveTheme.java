@@ -65,6 +65,10 @@ public class SynthwaveTheme extends Theme{
         graphics.fillRoundRect(x, y, width, height, 10, 10);
     }
 
+    public void drawText(Graphics graphics, int x,int y,int size){
+        
+    }
+
     @Override
     public void drawBackground(Graphics graphics) {
         Image background = Toolkit.getDefaultToolkit().getImage("ressources/images/background/synthwave.jpg");
