@@ -14,10 +14,16 @@ import java.lang.reflect.InvocationTargetException;
 
 public class Tetris {
 
-    public void loadFonts() throws IOException, FontFormatException {
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        Font vcr_osd_mono = Font.createFont(Font.TRUETYPE_FONT, new File("resources/fonts/vcr_osd_mono.ttf"));
-        ge.registerFont(vcr_osd_mono);
+    public static void loadFonts() {
+        try {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            Font vcr_osd_mono = Font.createFont(Font.TRUETYPE_FONT, new File("resources/fonts/VCR_OSD_MONO_1.001.ttf"));
+            // name : VCR OSD Mono
+            ge.registerFont(vcr_osd_mono);
+        }
+        catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
     }
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
         SwingUtilities.invokeAndWait(new Runnable() {
@@ -37,6 +43,7 @@ public class Tetris {
                    display.widgets.add(heldPieceWidget);
                    display.widgets.add(nextPieceWidget);
                    display.widgets.add(infoWidget);
+                   loadFonts();
                    Screen screen = new Screen(width, height, game);
                    screen.setBackground(Color.BLACK);
                    screen.addDisplay(display);
