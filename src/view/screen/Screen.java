@@ -72,6 +72,8 @@ public class Screen extends JFrame implements Observer {
             //@Override
             public void run() {
                 if (display != null)
+                    requestFocus();
+                    //display.requestFocusInWindow();
                     display.update(o, arg);
             }
         });

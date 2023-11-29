@@ -1,9 +1,7 @@
 package view.theme;
 
-import controller.widget.GridWidget;
+import controller.widget.*;
 import controller.widget.HeldPieceWidget;
-import controller.widget.HeldPieceWidget;
-import controller.widget.NextPieceWidget;
 import model.block.Block;
 import model.block.BlockType;
 import model.grid.Grid;
@@ -115,7 +113,6 @@ public abstract class Theme {
             drawBoundingPiece(graphics, blockSize, pieceX, pieceY, nextPieces[i+1], 255);
         }
     }
-
 
     public abstract void playBackgroundMusic();
 

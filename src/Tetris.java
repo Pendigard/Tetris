@@ -1,8 +1,5 @@
 import controller.display.Display;
-import controller.widget.GridWidget;
-import controller.widget.BackgroundWidget;
-import controller.widget.HeldPieceWidget;
-import controller.widget.NextPieceWidget;
+import controller.widget.*;
 import model.game.Game;
 import view.screen.Screen;
 import view.theme.ClassicTheme;
@@ -33,6 +30,7 @@ public class Tetris {
                    Screen screen = new Screen(width, height, game);
                    screen.setBackground(Color.BLACK);
                    screen.addDisplay(display);
+                   screen.getFocusListeners();
                    screen.setVisible(true);
                }
            }
