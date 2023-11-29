@@ -22,6 +22,9 @@ public abstract class Theme {
 
     protected Clip backgroundMusic;
 
+    public Theme() {
+    }
+
     protected void drawRectBorderSize(Graphics graphics, int x, int y, int width, int height, int borderSize, Color color) {
         graphics.setColor(color);
         for (int i = 0; i < borderSize; i++) {

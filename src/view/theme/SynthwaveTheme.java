@@ -11,6 +11,13 @@ import java.awt.*;
 
 public class SynthwaveTheme extends Theme{
 
+    Image background;
+
+    public SynthwaveTheme(){
+        super();
+        loadTheme();
+    }
+
     private static final Color GRID_COLOR = new Color(5, 2, 49, 255);
     @Override
     public Color getColor(Block block) {
@@ -59,14 +66,6 @@ public class SynthwaveTheme extends Theme{
         }
     }
 
-
-    public void drawText(Graphics graphics, int x,int y,String txt){
-        Font font = new Font("Arial", Font.BOLD, 20);
-        graphics.setFont(font);
-        graphics.setColor(Color.BLUE);
-        graphics.drawString(txt, x, y);
-    }
-
     @Override
     public void drawBox(Graphics graphics, int x, int y, int width, int height, int opacity) {
         graphics.setColor(new Color(GRID_COLOR.getRed(), GRID_COLOR.getGreen(), GRID_COLOR.getBlue(), 220));
@@ -74,13 +73,13 @@ public class SynthwaveTheme extends Theme{
     }
     @Override
     public void drawBackground(Graphics graphics) {
-        Image background = Toolkit.getDefaultToolkit().getImage("resources/images/background/synthwave.jpg");
         graphics.drawImage(background, 0, 0, width, height, null);
     }
 
     @Override
     public void loadTheme(){
-        fontName = "arial";
+        fontName = "VCR OSD Mono";
+        background = Toolkit.getDefaultToolkit().getImage("resources/images/background/synthwave.jpg");
     }
     @Override
     public void playBackgroundMusic() {
