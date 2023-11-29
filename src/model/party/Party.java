@@ -72,6 +72,7 @@ public class Party {
         level = 1;
         lines = 0;
         initNextPieces();
+        holdPiece = null;
         grid.reset();
         holdPiece = null;
         isAlive = true;
