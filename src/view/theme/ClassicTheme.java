@@ -62,6 +62,7 @@ public class ClassicTheme extends Theme {
         graphics.drawString(txt, x, y);
     }
 
+    @Override
     public void loadTheme(){
         fontName = "arial";
     }

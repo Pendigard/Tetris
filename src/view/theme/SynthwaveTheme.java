@@ -72,27 +72,16 @@ public class SynthwaveTheme extends Theme{
         graphics.setColor(new Color(GRID_COLOR.getRed(), GRID_COLOR.getGreen(), GRID_COLOR.getBlue(), 220));
         graphics.fillRoundRect(x, y, width, height, 10, 10);
     }
-
-    public void drawText(Graphics graphics, int x,int y,int size){
-
-    }
-
     @Override
     public void drawBackground(Graphics graphics) {
         Image background = Toolkit.getDefaultToolkit().getImage("resources/images/background/synthwave.jpg");
         graphics.drawImage(background, 0, 0, width, height, null);
     }
 
-
+    @Override
     public void loadTheme(){
         fontName = "arial";
     }
-
-    @Override
-    public void loadTheme() {
-
-    }
-
     @Override
     public void playBackgroundMusic() {
 
