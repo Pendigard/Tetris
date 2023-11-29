@@ -87,8 +87,16 @@ public abstract class Theme {
     public void drawText(Graphics graphics, int x,int y,Color c, int size,String txt){
         Font font = new Font(fontName, Font.BOLD, size);
         graphics.setFont(font);
-        graphics.setColor(Color.BLUE);
+        graphics.setColor(c);
         graphics.drawString(txt, x, y);
+    }
+
+    public void drawTextCenteredX(Graphics graphics, int x, int y, int width, Color c, int size,String txt){
+        Font font = new Font(fontName, Font.BOLD, size);
+        graphics.setFont(font);
+        graphics.setColor(c);
+        int textWidth = graphics.getFontMetrics().stringWidth(txt);
+        graphics.drawString(txt, (width+x)/2-textWidth/2, y);
     }
 
     public abstract void drawBackground(Graphics graphics);
@@ -96,12 +104,19 @@ public abstract class Theme {
     public void drawInfo(Graphics graphics, InfoWidget infoWidget){
         int x = infoWidget.getRealX(width);
         int y = infoWidget.getRealY(height);
-        int widgetWidth = infoWidget.getRealHeight(height);
-        int widgetHeight = infoWidget.getRealWidth(width);
+        int widgetWidth = infoWidget.getRealWidth(width);
+        int widgetHeight = infoWidget.getRealHeight(height);
+        int size = widgetHeight/10;
         drawBox(graphics, x, y, widgetWidth, widgetHeight, 255);
-        drawText(graphics,x,y+20,Color.BLACK,20,"Lvl : " + String.valueOf(infoWidget.getParty().getLevel()));
-        drawText(graphics,x,y+40,Color.BLACK,20,"Score : " + String.valueOf(infoWidget.getParty().getScore()));
-        drawText(graphics,x,y+60,Color.BLACK,20,"Line : " + String.valueOf(infoWidget.getParty().getLines()));
+
+        int textX = x + widgetWidth/2 - size*2;
+
+        drawTextCenteredX(graphics,textX,y+widgetHeight/10, widgetWidth, Color.WHITE,size,"Level");
+        drawTextCenteredX(graphics,textX,y+(widgetHeight/10)*2, widgetWidth, Color.WHITE,size,String.valueOf(infoWidget.getParty().getLevel()));
+        drawTextCenteredX(graphics,textX,y+(widgetHeight/10)*4, widgetWidth, Color.WHITE,size,"Score");
+        drawTextCenteredX(graphics,textX,y+(widgetHeight/10)*5, widgetWidth, Color.WHITE,size,String.valueOf(infoWidget.getParty().getScore()));
+        drawTextCenteredX(graphics,textX,y+(widgetHeight/10)*7, widgetWidth, Color.WHITE,size,"Lines");
+        drawTextCenteredX(graphics,textX,y+(widgetHeight/10)*8, widgetWidth, Color.WHITE,size,String.valueOf(infoWidget.getParty().getLines()));
     }
 
     public void drawHeldPiece(Graphics graphics, HeldPieceWidget heldPieceWidget, int opacity) {
@@ -112,7 +127,7 @@ public abstract class Theme {
         int widgetHeight = heldPieceWidget.getRealHeight(height);
         drawBox(graphics, x, y, widgetWidth, widgetHeight, opacity);
         if (piece != null) {
-            int blockSize = widgetHeight/6;
+            int blockSize = widgetWidth/6;
             int nbrBlocksX = piece.getPieceBoundingBox()[0].length;
             int nbrBlocksY = piece.getPieceBoundingBox().length;
             int pieceX = x + blockSize + (int)((4-nbrBlocksX)*blockSize*0.5); // To center the piece
@@ -124,11 +139,11 @@ public abstract class Theme {
     public void drawNextPiece(Graphics graphics, NextPieceWidget nextPieceWidget) {
         int x = nextPieceWidget.getRealX(width);
         int y = nextPieceWidget.getRealY(height);
-        int widgetWidth = nextPieceWidget.getRealHeight(height);
-        int widgetHeight = nextPieceWidget.getRealWidth(width);
+        int widgetWidth = nextPieceWidget.getRealWidth(width);
+        int widgetHeight = nextPieceWidget.getRealHeight(height);
         drawBox(graphics, x, y, widgetWidth, widgetHeight, 255);
         Piece[] nextPieces = nextPieceWidget.getParty().getNextPieces();
-        int blockSize = widgetWidth/6;
+        int blockSize = widgetHeight/12;
         for (int i = 0; i < 3; i++) {
             int nbrBlocksX = nextPieces[i+1].getPieceBoundingBox()[0].length;
             int pieceX = x + blockSize + (int)((4-nbrBlocksX)*blockSize*0.5); // To center the piece
