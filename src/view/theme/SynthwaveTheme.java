@@ -83,6 +83,11 @@ public class SynthwaveTheme extends Theme{
         graphics.drawImage(background, 0, 0, width, height, null);
     }
 
+
+    public void loadTheme(){
+        fontName = "arial";
+    }
+
     @Override
     public void playBackgroundMusic() {
 

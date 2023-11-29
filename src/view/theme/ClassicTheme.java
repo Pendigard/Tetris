@@ -63,7 +63,7 @@ public class ClassicTheme extends Theme {
     }
 
     public void loadTheme(){
-
+        fontName = "arial";
     }
 
     @Override

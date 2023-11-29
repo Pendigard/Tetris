@@ -18,6 +18,8 @@ public abstract class Theme {
 
     protected int width = 0;
     protected int height = 0;
+    protected String fontName;
+
     protected Clip backgroundMusic;
 
     protected void drawRectBorderSize(Graphics graphics, int x, int y, int width, int height, int borderSize, Color color) {
@@ -79,7 +81,12 @@ public abstract class Theme {
 
     public abstract void drawBox(Graphics graphics, int x, int y, int width, int height, int opacity);
 
-    public abstract void drawText(Graphics graphics, int x,int y,String txt);
+    public void drawText(Graphics graphics, int x,int y,Color c, int size,String txt){
+        Font font = new Font(fontName, Font.BOLD, size);
+        graphics.setFont(font);
+        graphics.setColor(Color.BLUE);
+        graphics.drawString(txt, x, y);
+    }
 
     public abstract void drawBackground(Graphics graphics);
 
@@ -89,7 +96,9 @@ public abstract class Theme {
         int widgetWidth = infoWidget.getRealHeight(height);
         int widgetHeight = infoWidget.getRealWidth(width);
         drawBox(graphics, x, y, widgetWidth, widgetHeight, 255);
-        drawText(graphics,x,y,"test");
+        drawText(graphics,x,y+20,Color.BLACK,20,"Lvl : " + String.valueOf(infoWidget.getParty().getLevel()));
+        drawText(graphics,x,y+40,Color.BLACK,20,"Score : " + String.valueOf(infoWidget.getParty().getScore()));
+        drawText(graphics,x,y+60,Color.BLACK,20,"Line : " + String.valueOf(infoWidget.getParty().getLines()));
     }
 
     public void drawHeldPiece(Graphics graphics, HeldPieceWidget heldPieceWidget, int opacity) {
