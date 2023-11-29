@@ -55,6 +55,10 @@ public class ClassicTheme extends Theme {
         graphics.fillRoundRect(x, y, width, height, 10, 10);
     }
 
+    public void drawText(Graphics graphics, int x,int y,int size){
+
+    }
+
     @Override
     public void playBackgroundMusic() {
         try {
