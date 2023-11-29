@@ -55,14 +55,21 @@ public class ClassicTheme extends Theme {
         graphics.fillRoundRect(x, y, width, height, 10, 10);
     }
 
-    public void drawText(Graphics graphics, int x,int y,int size){
+    public void drawText(Graphics graphics, int x,int y,String txt){
+        Font font = new Font("Arial", Font.BOLD, 20);
+        graphics.setFont(font);
+        graphics.setColor(Color.BLUE);
+        graphics.drawString(txt, x, y);
+    }
+
+    public void loadTheme(){
 
     }
 
     @Override
     public void playBackgroundMusic() {
         try {
-            File audioFile = new File("ressources/wav/Tetris_base.wav");
+            File audioFile = new File("resources/wav/Tetris_base.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
 
             backgroundMusic = AudioSystem.getClip();
