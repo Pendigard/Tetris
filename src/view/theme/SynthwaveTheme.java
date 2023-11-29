@@ -89,6 +89,11 @@ public class SynthwaveTheme extends Theme{
     }
 
     @Override
+    public void loadTheme() {
+
+    }
+
+    @Override
     public void playBackgroundMusic() {
 
     }
