@@ -158,6 +158,10 @@ public class Party {
         holdPiece.resetPosition();
     }
 
+    public boolean canMoveDown() {
+        return grid.CanGoDown(nextPieces[0]);
+    }
+
     public int getTimeInterval() {
         return Math.max(500 - level * level,1);
     }

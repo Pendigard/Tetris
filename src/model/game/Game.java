@@ -22,7 +22,8 @@ public class Game extends Observable implements Runnable {
             case KeyEvent.VK_RIGHT -> party.moveRight();
             case KeyEvent.VK_DOWN -> {
                 party.moveDown();
-                party.addScore(1);
+                if (party.canMoveDown())
+                    party.addScore(1);
             }
             case KeyEvent.VK_UP -> party.rotate();
             case KeyEvent.VK_SPACE -> party.hardDrop();
