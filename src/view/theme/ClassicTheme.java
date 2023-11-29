@@ -1,6 +1,7 @@
 package view.theme;
 
 import controller.widget.GridWidget;
+import controller.widget.HeldPieceWidget;
 import model.block.Block;
 import model.block.BlockType;
 import model.grid.Grid;
@@ -12,6 +13,10 @@ import javax.sound.sampled.*;
 
 public class ClassicTheme extends Theme {
 
+    private static final Color BACKGROUND_COLOR = new Color(187, 187, 187, 255);
+
+    private static final Color GRID_COLOR = new Color(5, 2, 49, 255);
+
     @Override
     public Color getColor(Block block) {
         return switch (block.getType()) {
@@ -22,53 +27,32 @@ public class ClassicTheme extends Theme {
             case PURPLE -> Color.MAGENTA;
             case RED -> Color.RED;
             case CYAN -> Color.CYAN;
-            default -> Color.BLACK;
+            default -> GRID_COLOR;
         };
     }
 
     @Override
-    public void drawBlock(Graphics graphics, GridWidget gridWidget, Block block, int x, int y, int opacity) {
+    public void drawBlock(Graphics graphics, Block block, int borderSize, int x, int y, int opacity) {
         Color color = getColor(block);
+        int blockSize = borderSize - borderSize/10;
+        graphics.setColor(GRID_COLOR);
+        graphics.fillRect(x, y, borderSize, borderSize);
         graphics.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity));
-        double realX = gridWidget.getPropX()/100.0 * width;
-        double realY = gridWidget.getPropY()/100.0 * height;
-        double realCellSize = (gridWidget.getPropHeight()/100.0 * height)/gridWidget.getParty().getGrid().getNbRows();
-        graphics.fillRect( (int)realX + x * (int)realCellSize, (int)realY + y * (int)realCellSize, (int)realCellSize, (int)realCellSize);
-        graphics.setColor(Color.BLACK);
-        graphics.drawRect((int)realX + x * (int)realCellSize, (int)realY + y * (int)realCellSize, (int)realCellSize, (int)realCellSize);
+        graphics.fillRect( x+borderSize/20, y+borderSize/20, blockSize, blockSize);
     }
 
-    @Override
-    public void drawPiece(Graphics graphics, GridWidget gridWidget, Piece piece, int opacity) {
-        Block[][] blocks = piece.getBlocks();
-        for (int i = 0; i < blocks.length; i++) {
-            for (int j = 0; j < blocks[i].length; j++) {
-                if (blocks[i][j].getType() != BlockType.EMPTY) {
-                    drawBlock(graphics, gridWidget, blocks[i][j], piece.getX() + j, piece.getY() + i, opacity);
-                }
-            }
-        }
-
-    }
-
-
-    @Override
-    public void drawGrid(Graphics graphics, GridWidget gridWidget, Grid grid, Piece currentPiece) {
-        for (int i = 0; i < grid.getNbRows(); i++) {
-            for (int j = 0; j < grid.getNbColumns(); j++) {
-                Block block = grid.getBlock(i, j);
-                drawBlock(graphics, gridWidget, block, j, i, 255);
-            }
-        }
-        drawPiece(graphics, gridWidget, currentPiece, 255);
-        drawPiece(graphics, gridWidget, gridWidget.getParty().getGhostPiece(), 100);
-    }
 
     @Override
     public void drawBackground(Graphics graphics){
-        graphics.setColor(Color.YELLOW);
+        graphics.setColor(BACKGROUND_COLOR);
         graphics.fillRect( 0, 0, width , height);
 
+    }
+
+    @Override
+    public void drawBox(Graphics graphics, int x, int y, int width, int height, int opacity) {
+        graphics.setColor(GRID_COLOR);
+        graphics.fillRoundRect(x, y, width, height, 10, 10);
     }
 
     @Override
