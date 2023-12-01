@@ -94,9 +94,16 @@ public abstract class Theme {
     public void drawTextCenteredX(Graphics graphics, int x, int y, int width, Color c, int size,String txt){
         Font font = new Font(fontName, Font.BOLD, size);
         graphics.setFont(font);
-        graphics.setColor(c);
         int textWidth = graphics.getFontMetrics().stringWidth(txt);
-        graphics.drawString(txt, (width+x)/2-textWidth/2, y);
+        drawText(graphics, (x+width/2)-textWidth/2, y, c, size, txt);
+    }
+
+    public void drawTextCentered(Graphics graphics, int x, int y, int width, int height, Color c, int size,String txt){
+        Font font = new Font(fontName, Font.BOLD, size);
+        graphics.setFont(font); // set font to center text
+        int textWidth = graphics.getFontMetrics().stringWidth(txt);
+        int textHeight = (int)((textWidth/txt.length())*1.5);
+        drawText(graphics, (x+width/2)-textWidth/2, (y+height/2)+textHeight/2, c, size, txt);
     }
 
     public abstract void drawBackground(Graphics graphics);
@@ -109,14 +116,12 @@ public abstract class Theme {
         int size = widgetHeight/10;
         drawBox(graphics, x, y, widgetWidth, widgetHeight, 255);
 
-        int textX = x + widgetWidth/2 - size*2;
-
-        drawTextCenteredX(graphics,textX,y+widgetHeight/10, widgetWidth, Color.WHITE,size,"Level");
-        drawTextCenteredX(graphics,textX,y+(widgetHeight/10)*2, widgetWidth, Color.WHITE,size,String.valueOf(infoWidget.getParty().getLevel()));
-        drawTextCenteredX(graphics,textX,y+(widgetHeight/10)*4, widgetWidth, Color.WHITE,size,"Score");
-        drawTextCenteredX(graphics,textX,y+(widgetHeight/10)*5, widgetWidth, Color.WHITE,size,String.valueOf(infoWidget.getParty().getScore()));
-        drawTextCenteredX(graphics,textX,y+(widgetHeight/10)*7, widgetWidth, Color.WHITE,size,"Lines");
-        drawTextCenteredX(graphics,textX,y+(widgetHeight/10)*8, widgetWidth, Color.WHITE,size,String.valueOf(infoWidget.getParty().getLines()));
+        drawTextCenteredX(graphics, x,y+widgetHeight/10, widgetWidth, Color.WHITE,size,"Level");
+        drawTextCenteredX(graphics, x,y+(widgetHeight/10)*2, widgetWidth, Color.WHITE,size,String.valueOf(infoWidget.getParty().getLevel()));
+        drawTextCenteredX(graphics, x,y+(widgetHeight/10)*4, widgetWidth, Color.WHITE,size,"Score");
+        drawTextCenteredX(graphics, x,y+(widgetHeight/10)*5, widgetWidth, Color.WHITE,size,String.valueOf(infoWidget.getParty().getScore()));
+        drawTextCenteredX(graphics, x,y+(widgetHeight/10)*7, widgetWidth, Color.WHITE,size,"Lines");
+        drawTextCenteredX(graphics, x,y+(widgetHeight/10)*8, widgetWidth, Color.WHITE,size,String.valueOf(infoWidget.getParty().getLines()));
     }
 
     public void drawHeldPiece(Graphics graphics, HeldPieceWidget heldPieceWidget, int opacity) {
@@ -150,6 +155,21 @@ public abstract class Theme {
             int pieceY = y + blockSize + i*blockSize*4;
             drawBoundingPiece(graphics, blockSize, pieceX, pieceY, nextPieces[i+1], 255);
         }
+    }
+
+    public void drawButton(Graphics graphics, ButtonWidget buttonWidget) {
+        int x = buttonWidget.getRealX(width);
+        int y = buttonWidget.getRealY(height);
+        int widgetWidth = buttonWidget.getRealWidth(width);
+        int widgetHeight = buttonWidget.getRealHeight(height);
+        if (buttonWidget.selected) {
+            graphics.setColor(new Color(113, 115, 234, 255));
+        }
+        else {
+            graphics.setColor(new Color(113, 115, 234, 100));
+        }
+        graphics.fillRect(x, y, widgetWidth, widgetHeight);
+        drawTextCentered(graphics, x, y, widgetWidth, widgetHeight, Color.BLACK, widgetHeight/2, buttonWidget.getText());
     }
 
     public abstract void loadTheme();

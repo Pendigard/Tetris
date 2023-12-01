@@ -1,5 +1,7 @@
 package controller.display;
 
+import controller.menu.Menu;
+import controller.widget.ButtonWidget;
 import controller.widget.Widget;
 import model.game.Game;
 import view.theme.ClassicTheme;
@@ -23,6 +25,8 @@ public class Display extends Canvas implements Observer {
     protected int width;
     protected int height;
 
+    protected Menu menu = null;
+
 
     public Display(Theme theme) {
         super();
@@ -31,6 +35,7 @@ public class Display extends Canvas implements Observer {
         this.width = 0;
         this.height = 0;
         theme.playBackgroundMusic();
+        menu = null;
     }
 
     public Display(Theme theme, int width, int height) {
@@ -53,6 +58,13 @@ public class Display extends Canvas implements Observer {
         for (Widget widget : widgets) {
             widget.paint(g, theme);
         }
+        if (menu != null) {
+            for (ArrayList<ButtonWidget> buttonList : menu.getButtons()) {
+                for (ButtonWidget button : buttonList) {
+                    button.paint(g, theme);
+                }
+            }
+        }
     }
 
     @Override
@@ -67,6 +79,10 @@ public class Display extends Canvas implements Observer {
         g.dispose();
         //Toolkit.getDefaultToolkit().sync(); // forcer la synchronisation
         bs.show();
+    }
+
+    public void changeMenu(Menu newMenu) {
+        menu = newMenu;
     }
 
     public void changeTheme(Theme newTheme) {

@@ -1,6 +1,9 @@
 package view.screen;
 
 import controller.display.Display;
+import controller.menu.GameOverMenu;
+import controller.menu.Menu;
+import controller.menu.PauseMenu;
 import model.game.Game;
 import view.theme.ClassicTheme;
 import view.theme.SynthwaveTheme;
@@ -18,6 +21,14 @@ public class Screen extends JFrame implements Observer {
 
         Game game;
 
+        boolean inGame = true;
+
+        Menu menu = null;
+
+        private void getInput(KeyEvent e) {
+
+        }
+
         public Screen(int width, int height, Game game) {
             super("Tetris");
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,7 +45,23 @@ public class Screen extends JFrame implements Observer {
                         else
                             display.changeTheme(new SynthwaveTheme());
                     }
-                    game.keyPressed(e);
+                    if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                        if (inGame) {
+                            inGame = false;
+                            menu = new PauseMenu();
+                        }
+                        else {
+                            inGame = true;
+                            menu = null;
+                        }
+                    }
+                    if (inGame) {
+                        game.keyPressed(e);
+                    }
+                    else {
+                        if (menu != null)
+                            menu.getInput(e);
+                    }
                 }
             });
 
@@ -49,6 +76,7 @@ public class Screen extends JFrame implements Observer {
 
         public void addDisplay(Display display) {
             this.display = display;
+            display.changeMenu(menu);
             game.addObserver(this.display);
             JPanel panel = new JPanel();
             panel.setLayout(new BorderLayout());
@@ -71,12 +99,16 @@ public class Screen extends JFrame implements Observer {
         SwingUtilities.invokeLater(new Runnable() {
             //@Override
             public void run() {
-                if (display != null)
+                game.pause = !inGame;
+                if (display != null) {
+                    display.changeMenu(menu);
                     requestFocus();
                     //display.requestFocusInWindow();
                     display.update(o, arg);
+                }
             }
         });
 
     }
 }
+
