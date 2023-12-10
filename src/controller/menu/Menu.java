@@ -11,6 +11,8 @@ public abstract class Menu {
     protected int choiceX = 0;
     protected int choiceY = 0;
 
+    protected boolean enter = false;
+
     ArrayList<ArrayList<ButtonWidget>> buttons;
 
     public Menu() {
@@ -74,8 +76,15 @@ public abstract class Menu {
             right();
         }
         buttons.get(choiceY).get(choiceX).selected = true;
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            enter = true;
+        }
+    }
+
+    public boolean getEnter() {
+        return enter;
     }
 
 
-    public abstract void update(KeyEvent e, Screen screen);
+    public abstract void update(Screen screen);
 }

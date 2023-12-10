@@ -13,7 +13,13 @@ public class PauseMenu extends Menu {
         addButtonY(new ButtonWidget(32, 50, 35, 10, "Quit"));
     }
     @Override
-    public void update(KeyEvent e, Screen screen) {
-
+    public void update(Screen screen) {
+        if (choiceY == 1) {
+            System.exit(0);
+        }
+        else {
+            screen.menu = null;
+            screen.inGame = true;
+        }
     }
 }

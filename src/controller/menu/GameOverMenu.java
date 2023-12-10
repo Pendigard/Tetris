@@ -13,7 +13,7 @@ public class GameOverMenu extends Menu {
         addButtonX(new ButtonWidget(40, 60, 20, 10, "Quit"), 0);
     }
     @Override
-    public void update(KeyEvent e, Screen screen) {
+    public void update(Screen screen) {
 
     }
 }

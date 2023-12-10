@@ -17,13 +17,13 @@ import java.util.Observer;
 
 public class Screen extends JFrame implements Observer {
 
-        Display display;
+        public Display display;
 
-        Game game;
+        public Game game;
 
-        boolean inGame = true;
+        public boolean inGame = true;
 
-        Menu menu = null;
+        public Menu menu = null;
 
         private void getInput(KeyEvent e) {
 
@@ -94,6 +94,12 @@ public class Screen extends JFrame implements Observer {
             display.setDisplaySize(getWidth(), getHeight());
         }
 
+        public void enter() {
+            if (menu.getEnter()) {
+                menu.update(this);
+            }
+        }
+
     @Override
     public void update(Observable o, Object arg) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -106,6 +112,8 @@ public class Screen extends JFrame implements Observer {
                     //display.requestFocusInWindow();
                     display.update(o, arg);
                 }
+                if (menu != null)
+                    enter();
             }
         });
 
