@@ -19,22 +19,17 @@ public class Game extends Observable implements Runnable {
     }
 
     public void keyPressed(KeyEvent keyEvent) {
-        if(party.getAlive() && !pause) {
-            switch (keyEvent.getKeyCode()) {
-                case KeyEvent.VK_LEFT -> party.moveLeft();
-                case KeyEvent.VK_RIGHT -> party.moveRight();
-                case KeyEvent.VK_DOWN -> {
-                    party.moveDown();
-                    if (party.canMoveDown())
-                        party.addScore(1);
-                }
-                case KeyEvent.VK_UP -> party.rotate();
-                case KeyEvent.VK_SPACE -> party.hardDrop();
-                case KeyEvent.VK_H -> party.holdPiece();
+        switch (keyEvent.getKeyCode()) {
+            case KeyEvent.VK_LEFT -> party.moveLeft();
+            case KeyEvent.VK_RIGHT -> party.moveRight();
+            case KeyEvent.VK_DOWN -> {
+                party.moveDown();
+                if (party.canMoveDown())
+                    party.addScore(1);
             }
-        }
-        else {
-            if(keyEvent.getKeyCode() == KeyEvent.VK_SPACE) party.reset();
+            case KeyEvent.VK_UP -> party.rotate();
+            case KeyEvent.VK_SPACE -> party.hardDrop();
+            case KeyEvent.VK_H -> party.holdPiece();
         }
     }
 

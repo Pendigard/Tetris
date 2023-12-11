@@ -1,9 +1,9 @@
 package controller.display;
 
 import controller.menu.Menu;
-import controller.widget.ButtonWidget;
-import controller.widget.Widget;
+import controller.widget.*;
 import model.game.Game;
+import model.party.Party;
 import view.theme.ClassicTheme;
 import view.theme.SynthwaveTheme;
 import view.theme.Theme;
@@ -94,5 +94,25 @@ public class Display extends Canvas implements Observer {
 
     public Theme getTheme() {
         return theme;
+    }
+
+    public void setDisplaySolo(Party party) {
+        widgets.clear();
+        BackgroundWidget backgroundWidget = new BackgroundWidget(width, height);
+        GridWidget gridWidget = new GridWidget(30, 8, 80, party);
+        HeldPieceWidget heldPieceWidget = new HeldPieceWidget(5, 8, 20, party);
+        NextPieceWidget nextPieceWidget = new NextPieceWidget(75, 8, 20, 40, party);
+        InfoWidget infoWidget = new InfoWidget(5, 62, 20, 25, party);
+        widgets.add(backgroundWidget);
+        widgets.add(gridWidget);
+        widgets.add(heldPieceWidget);
+        widgets.add(nextPieceWidget);
+        widgets.add(infoWidget);
+    }
+
+    public void setDisplayMenu() {
+        widgets.clear();
+        BackgroundWidget backgroundWidget = new BackgroundWidget(width, height);
+        widgets.add(backgroundWidget);
     }
 }

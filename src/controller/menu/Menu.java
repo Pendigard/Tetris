@@ -31,7 +31,11 @@ public abstract class Menu {
     }
 
     protected void addButtonX(ButtonWidget button, int y) {
-        assert y >= 0 && y < buttons.size();
+        if (y >= buttons.size()) {
+            for (int i = buttons.size(); i <= y; i++) {
+                buttons.add(new ArrayList<>());
+            }
+        }
         buttons.get(y).add(button);
     }
 

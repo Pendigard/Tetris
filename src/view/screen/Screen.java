@@ -7,6 +7,7 @@ import controller.menu.PauseMenu;
 import model.game.Game;
 import view.theme.ClassicTheme;
 import view.theme.SynthwaveTheme;
+import view.theme.Theme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,13 +22,11 @@ public class Screen extends JFrame implements Observer {
 
         public Game game;
 
-        public boolean inGame = true;
+        public boolean inGame = false;
+
+        public boolean pause = false;
 
         public Menu menu = null;
-
-        private void getInput(KeyEvent e) {
-
-        }
 
         public Screen(int width, int height, Game game) {
             super("Tetris");
@@ -47,15 +46,19 @@ public class Screen extends JFrame implements Observer {
                     }
                     if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                         if (inGame) {
-                            inGame = false;
-                            menu = new PauseMenu();
-                        }
-                        else {
-                            inGame = true;
-                            menu = null;
+                            if (pause) {
+                                menu = null;
+                                pause = false;
+                                game.pause = false;
+                            }
+                            else {
+                                menu = new PauseMenu();
+                                pause = true;
+                                game.pause = true;
+                            }
                         }
                     }
-                    if (inGame) {
+                    if (inGame && !pause) {
                         game.keyPressed(e);
                     }
                     else {
@@ -85,15 +88,6 @@ public class Screen extends JFrame implements Observer {
             display.setDisplaySize(getWidth(), getHeight());
         }
 
-        public void changeDisplay(Display display) {
-            if (this.display != null)
-                game.deleteObserver(this.display);
-            this.getContentPane().removeAll();
-            this.display = display;
-            game.addObserver(this.display);
-            display.setDisplaySize(getWidth(), getHeight());
-        }
-
         public void enter() {
             if (menu.getEnter()) {
                 menu.update(this);
@@ -105,7 +99,12 @@ public class Screen extends JFrame implements Observer {
         SwingUtilities.invokeLater(new Runnable() {
             //@Override
             public void run() {
-                game.pause = !inGame;
+                if (inGame) {
+                    if (game.partiesOver()) {
+                        inGame = false;
+                        menu = new GameOverMenu();
+                    }
+                }
                 if (display != null) {
                     display.changeMenu(menu);
                     requestFocus();
