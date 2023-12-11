@@ -38,7 +38,7 @@ public class Screen extends JFrame implements Observer {
                 @Override
                 public void keyPressed(KeyEvent e) { //évènement clavier : object contrôleur qui réceptionne
                     super.keyPressed(e);
-                    if (e.getKeyCode() == KeyEvent.VK_S) {
+                    if (e.getKeyCode() == KeyEvent.VK_T) {
                         if (display.getTheme().getClass() == SynthwaveTheme.class)
                             display.changeTheme(new ClassicTheme());
                         else
@@ -59,7 +59,8 @@ public class Screen extends JFrame implements Observer {
                         }
                     }
                     if (inGame && !pause) {
-                        game.keyPressed(e);
+                        game.keyPressed(e,true);
+                        if(game.duo)game.keyPressed(e,false);
                     }
                     else {
                         if (menu != null)

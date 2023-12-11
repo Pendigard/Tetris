@@ -110,6 +110,31 @@ public class Display extends Canvas implements Observer {
         widgets.add(infoWidget);
     }
 
+    public void setDisplayMult(Party party1,Party party2) {
+        widgets.clear();
+        BackgroundWidget backgroundWidget = new BackgroundWidget(width, height);
+        GridWidget gridWidget1 = new GridWidget(15, 8, 80, party1);
+        HeldPieceWidget heldPieceWidget1 = new HeldPieceWidget(2, 8, 20, party1);
+        NextPieceWidget nextPieceWidget1 = new NextPieceWidget(37, 8, 10, 40, party1);
+        InfoWidget infoWidget1 = new InfoWidget(2, 62, 10, 25, party1);
+
+        int decal = 50;
+        GridWidget gridWidget2 = new GridWidget(15 + decal, 8, 80, party2);
+        HeldPieceWidget heldPieceWidget2 = new HeldPieceWidget(2 + decal, 8, 20, party2);
+        NextPieceWidget nextPieceWidget2 = new NextPieceWidget(37 + decal, 8, 10, 40, party2);
+        InfoWidget infoWidget2 = new InfoWidget(2 + decal, 62, 10, 25, party2);
+
+        widgets.add(backgroundWidget);
+        widgets.add(gridWidget1);
+        widgets.add(gridWidget2);
+        widgets.add(heldPieceWidget1);
+        widgets.add(heldPieceWidget2);
+        widgets.add(nextPieceWidget1);
+        widgets.add(nextPieceWidget2);
+        widgets.add(infoWidget1);
+        widgets.add(infoWidget2);
+    }
+
     public void setDisplayMenu() {
         widgets.clear();
         BackgroundWidget backgroundWidget = new BackgroundWidget(width, height);

@@ -15,15 +15,32 @@ public class MainMenu extends Menu {
     }
     @Override
     public void update(Screen screen) {
-        if (choiceY == 0) {
-            screen.game.party.reset();
-            screen.inGame = true;
-            screen.menu = null;
-            screen.pause = false;
-            screen.display.setDisplaySolo(screen.game.party);
-        }
-        if (choiceY == 3) {
-            System.exit(0);
+        switch (choiceY){
+            case 0:
+                screen.game.party.reset();
+                screen.game.duo = false;
+                screen.setSize(800, 800);
+                screen.inGame = true;
+                screen.menu = null;
+                screen.pause = false;
+                screen.display.setDisplaySolo(screen.game.party);
+                break;
+            case 1:
+                screen.game.party.reset();
+                screen.game.partyDuo.reset();
+                screen.game.duo = true;
+                screen.setSize(1600, 800);
+                screen.inGame = true;
+                screen.menu = null;
+                screen.pause = false;
+                screen.display.setDisplayMult(screen.game.party,screen.game.partyDuo);
+                break;
+            case 2:
+                break;
+            case 3:
+                System.exit(0);
+                break;
+
         }
     }
 }
