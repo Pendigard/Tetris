@@ -12,6 +12,8 @@ public class Party {
     private int lines;
     private int combo = 0;
     private boolean isAlive = true;
+
+    private int dropInterval = 800;
     private int timeLastDrop = 0;
     private int timeLastLine = 0;
     private int timePlaced = -1;
@@ -167,10 +169,6 @@ public class Party {
         return grid.CanGoDown(nextPieces[0]);
     }
 
-    public int getTimeInterval() {
-        return 500 - (level - 1) * 30;
-    }
-
     public Piece getGhostPiece() {
         Piece ghostPiece = nextPieces[0].clone();
         while (grid.CanGoDown(ghostPiece)) {
@@ -207,6 +205,9 @@ public class Party {
 
     private void updateLevel() {
         level = lines/10 + 1;
+        if (level%10 == 0) {
+            dropInterval = (int)(800*Math.min(Math.pow(0.82, level-1),10));
+        }
     }
 
     private void gameOver(){
@@ -219,7 +220,7 @@ public class Party {
             isAlive = false;
         }
         if(isAlive) {
-            if (time - timeLastDrop >= getTimeInterval()) {
+            if (time - timeLastDrop >= dropInterval) {
                 timeLastDrop = time;
                 moveDown();
             }
