@@ -21,7 +21,7 @@ public class Game extends Observable implements Runnable {
     }
 
     public void keyPressed(KeyEvent keyEvent, boolean player) {
-        if(player){
+        if(player && !partiesOver()){
             switch (keyEvent.getKeyCode()) {
                 case KeyEvent.VK_LEFT -> party.moveLeft();
                 case KeyEvent.VK_RIGHT -> party.moveRight();
@@ -34,7 +34,8 @@ public class Game extends Observable implements Runnable {
                 case KeyEvent.VK_SPACE -> party.hardDrop();
                 case KeyEvent.VK_H -> party.holdPiece();
             }
-        }else{
+        }
+        if(!player && !partiesDuoOver()){
             switch (keyEvent.getKeyCode()) {
                 case KeyEvent.VK_Q -> partyDuo.moveLeft();
                 case KeyEvent.VK_D -> partyDuo.moveRight();
@@ -53,15 +54,18 @@ public class Game extends Observable implements Runnable {
     public boolean partiesOver() {
         return !party.getAlive();
     }
-    public boolean partiesDuoOver() {
+    public boolean partiesDuoOver(){
         return !partyDuo.getAlive();
+    }
+    public boolean allPartiesOver() {
+        return !(partyDuo.getAlive() || party.getAlive());
     }
 
     @Override
     public void run() {
         if(!pause) {
-            party.update(scheduler.getMsElapsed());
-            if (duo) partyDuo.update(scheduler.getMsElapsed());
+            if(!partiesOver()) party.update(scheduler.getMsElapsed());
+            if (duo && !partiesDuoOver()) partyDuo.update(scheduler.getMsElapsed());
         }
         setChanged();
         notifyObservers();

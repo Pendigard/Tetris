@@ -103,14 +103,9 @@ public class Screen extends JFrame implements Observer {
             public void run() {
                 if (inGame) {
                     if(game.duo) {
-                        if (game.partiesOver()) {
+                        if (game.allPartiesOver()) {
                             inGame = false;
                             menu = new GameOverDuoMenu(true);
-                            game.pause = true;
-                        }
-                        if (game.partiesDuoOver()) {
-                            inGame = false;
-                            menu = new GameOverDuoMenu(false);
                             game.pause = true;
                         }
                     }else{
