@@ -36,6 +36,7 @@ public class MainMenu extends Menu {
                 screen.display.setDisplayMult(screen.game.party,screen.game.partyDuo);
                 break;
             case 2:
+                screen.menu = new ThemeMenu();
                 break;
             case 3:
                 System.exit(0);
