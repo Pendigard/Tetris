@@ -3,6 +3,7 @@ package controller.menu;
 import controller.widget.ButtonWidget;
 import view.screen.Screen;
 import view.theme.ClassicTheme;
+import view.theme.RetroTheme;
 import view.theme.SynthwaveTheme;
 
 public class ThemeMenu extends Menu {
@@ -11,6 +12,7 @@ public class ThemeMenu extends Menu {
         super();
         addButtonY(new ButtonWidget(32, 10, 35, 10, "CLASSIC"));
         addButtonY(new ButtonWidget(32, 30, 35, 10, "SYNTHWAVE"));
+        addButtonY(new ButtonWidget(32, 50, 35, 10, "RETRO"));
         addButtonY(new ButtonWidget(5, 70, 35, 10, "BACK"));
     }
     @Override
@@ -25,6 +27,10 @@ public class ThemeMenu extends Menu {
                 enter = false;
                 break;
             case 2:
+                screen.display.changeTheme(new RetroTheme());
+                enter = false;
+                break;
+            case 3:
                 screen.menu = new MainMenu();
                 break;
         }
