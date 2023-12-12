@@ -9,8 +9,8 @@ public class GameOverMenu extends Menu {
 
     public GameOverMenu() {
         super();
-        addButtonX(new ButtonWidget(10, 60, 20, 10, "Restart"), 0);
-        addButtonX(new ButtonWidget(40, 60, 20, 10, "Quit"), 0);
+        addButtonX(new ButtonWidget(10, 60, 20, 10, "RESTART"), 0);
+        addButtonX(new ButtonWidget(40, 60, 20, 10, "QUIT"), 0);
         choiceX = 0;
         choiceY = 0;
     }

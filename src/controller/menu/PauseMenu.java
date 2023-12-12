@@ -9,8 +9,8 @@ public class PauseMenu extends Menu {
 
     public PauseMenu() {
         super();
-        addButtonY(new ButtonWidget(32, 30, 35, 10, "Resume"));
-        addButtonY(new ButtonWidget(32, 50, 35, 10, "Quit to menu"));
+        addButtonY(new ButtonWidget(32, 30, 35, 10, "RESUME"));
+        addButtonY(new ButtonWidget(32, 50, 35, 10, "QUIT TO MENU"));
     }
     @Override
     public void update(Screen screen) {

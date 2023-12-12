@@ -29,7 +29,7 @@ public class Tetris {
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
         SwingUtilities.invokeAndWait(new Runnable() {
                public void run() {
-                   int width = 800;
+                   int width = 1200;
                    int height = 800;
                    Theme theme = new ClassicTheme();
                    Game game = new Game();

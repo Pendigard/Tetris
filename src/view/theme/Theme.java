@@ -116,11 +116,11 @@ public abstract class Theme {
         int size = widgetHeight/10;
         drawBox(graphics, x, y, widgetWidth, widgetHeight, 255);
 
-        drawTextCenteredX(graphics, x,y+widgetHeight/10, widgetWidth, Color.WHITE,size,"Level");
+        drawTextCenteredX(graphics, x,y+widgetHeight/10, widgetWidth, Color.WHITE,size,"LEVEL");
         drawTextCenteredX(graphics, x,y+(widgetHeight/10)*2, widgetWidth, Color.WHITE,size,String.valueOf(infoWidget.getParty().getLevel()));
-        drawTextCenteredX(graphics, x,y+(widgetHeight/10)*4, widgetWidth, Color.WHITE,size,"Score");
+        drawTextCenteredX(graphics, x,y+(widgetHeight/10)*4, widgetWidth, Color.WHITE,size,"SCORE");
         drawTextCenteredX(graphics, x,y+(widgetHeight/10)*5, widgetWidth, Color.WHITE,size,String.valueOf(infoWidget.getParty().getScore()));
-        drawTextCenteredX(graphics, x,y+(widgetHeight/10)*7, widgetWidth, Color.WHITE,size,"Lines");
+        drawTextCenteredX(graphics, x,y+(widgetHeight/10)*7, widgetWidth, Color.WHITE,size,"LINES");
         drawTextCenteredX(graphics, x,y+(widgetHeight/10)*8, widgetWidth, Color.WHITE,size,String.valueOf(infoWidget.getParty().getLines()));
     }
 
@@ -163,10 +163,10 @@ public abstract class Theme {
         int widgetWidth = buttonWidget.getRealWidth(width);
         int widgetHeight = buttonWidget.getRealHeight(height);
         if (buttonWidget.selected) {
-            graphics.setColor(new Color(113, 115, 234, 255));
+            graphics.setColor(new Color(47, 175, 12, 255));
         }
         else {
-            graphics.setColor(new Color(113, 115, 234, 100));
+            graphics.setColor(new Color(121, 121, 121, 157));
         }
         graphics.fillRect(x, y, widgetWidth, widgetHeight);
         drawTextCentered(graphics, x, y, widgetWidth, widgetHeight, Color.BLACK, widgetHeight/2, buttonWidget.getText());

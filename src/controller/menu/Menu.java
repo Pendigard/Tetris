@@ -14,8 +14,6 @@ public abstract class Menu {
     protected int choiceY = 0;
 
     protected boolean enter = false;
-
-    ButtonWidget Title;
     ArrayList<ArrayList<ButtonWidget>> buttons;
 
     public Menu() {
@@ -26,10 +24,6 @@ public abstract class Menu {
         assert x >= 0 && x < buttons.size();
         choiceX = x;
         choiceY = y;
-    }
-
-    protected void addTitle(ButtonWidget button) {
-        Title = button;
     }
 
 

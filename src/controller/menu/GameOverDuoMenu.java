@@ -7,9 +7,8 @@ public class GameOverDuoMenu extends Menu {
 
     public GameOverDuoMenu(boolean player) {
         super();
-        addButtonX(new ButtonWidget(10, 60, 20, 10, "Restart"), 0);
-        addButtonX(new ButtonWidget(40, 60, 20, 10, "Quit"), 0);
-        addTitle(new ButtonWidget(30, 50, 20, 10, "JIAIJP"));
+        addButtonX(new ButtonWidget(10, 60, 20, 10, "RESTART"), 0);
+        addButtonX(new ButtonWidget(40, 60, 20, 10, "QUIT"), 0);
         choiceX = 0;
         choiceY = 0;
     }

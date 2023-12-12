@@ -1,5 +1,6 @@
 package view.theme;
 
+import controller.widget.ButtonWidget;
 import controller.widget.GridWidget;
 import controller.widget.HeldPieceWidget;
 import model.block.Block;
@@ -77,6 +78,18 @@ public class SynthwaveTheme extends Theme{
     @Override
     public void drawBackground(Graphics graphics) {
         graphics.drawImage(background, 0, 0, width, height, null);
+    }
+
+    public void drawButton(Graphics graphics, ButtonWidget buttonWidget) {
+        int x = buttonWidget.getRealX(width);
+        int y = buttonWidget.getRealY(height);
+        int widgetWidth = buttonWidget.getRealWidth(width);
+        int widgetHeight = buttonWidget.getRealHeight(height);
+        String text = buttonWidget.getText();
+        if (buttonWidget.selected) {
+            text = "> " + text + " <";
+        }
+        drawTextCentered(graphics, x, y, widgetWidth, widgetHeight, Color.WHITE, widgetHeight/2, text);
     }
 
     @Override

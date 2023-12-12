@@ -8,10 +8,10 @@ public class MainMenu extends Menu {
 
     public MainMenu() {
         super();
-        addButtonY(new ButtonWidget(32, 10, 35, 10, "Solo"));
-        addButtonY(new ButtonWidget(32, 30, 35, 10, "Duo"));
-        addButtonY(new ButtonWidget(32, 50, 35, 10, "Options"));
-        addButtonY(new ButtonWidget(32, 70, 35, 10, "Quit"));
+        addButtonY(new ButtonWidget(32, 35, 35, 10, "SOLO"));
+        addButtonY(new ButtonWidget(32, 50, 35, 10, "DUO"));
+        addButtonY(new ButtonWidget(32, 65, 35, 10, "OPTIONS"));
+        addButtonY(new ButtonWidget(32, 80, 35, 10, "QUIT"));
     }
     @Override
     public void update(Screen screen) {
@@ -19,7 +19,6 @@ public class MainMenu extends Menu {
             case 0:
                 screen.game.party.reset();
                 screen.game.duo = false;
-                screen.setSize(800, 800);
                 screen.inGame = true;
                 screen.menu = null;
                 screen.pause = false;
@@ -29,7 +28,6 @@ public class MainMenu extends Menu {
                 screen.game.party.reset();
                 screen.game.partyDuo.reset();
                 screen.game.duo = true;
-                screen.setSize(1600, 800);
                 screen.inGame = true;
                 screen.menu = null;
                 screen.pause = false;

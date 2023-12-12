@@ -9,9 +9,9 @@ public class ThemeMenu extends Menu {
 
     public ThemeMenu() {
         super();
-        addButtonY(new ButtonWidget(32, 10, 35, 10, "Classic"));
-        addButtonY(new ButtonWidget(32, 30, 35, 10, "Synthwave"));
-        addButtonY(new ButtonWidget(32, 50, 35, 10, "Back"));
+        addButtonY(new ButtonWidget(32, 10, 35, 10, "CLASSIC"));
+        addButtonY(new ButtonWidget(32, 30, 35, 10, "SYNTHWAVE"));
+        addButtonY(new ButtonWidget(5, 70, 35, 10, "BACK"));
     }
     @Override
     public void update(Screen screen) {

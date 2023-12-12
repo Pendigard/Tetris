@@ -99,9 +99,9 @@ public class Display extends Canvas implements Observer {
     public void setDisplaySolo(Party party) {
         widgets.clear();
         BackgroundWidget backgroundWidget = new BackgroundWidget(width, height);
-        GridWidget gridWidget = new GridWidget(30, 8, 80, party);
+        GridWidget gridWidget = new GridWidget(35, 8, 80, party);
         HeldPieceWidget heldPieceWidget = new HeldPieceWidget(5, 8, 20, party);
-        NextPieceWidget nextPieceWidget = new NextPieceWidget(75, 8, 20, 40, party);
+        NextPieceWidget nextPieceWidget = new NextPieceWidget(75, 8, 12, 40, party);
         InfoWidget infoWidget = new InfoWidget(5, 62, 20, 25, party);
         widgets.add(backgroundWidget);
         widgets.add(gridWidget);
@@ -113,16 +113,16 @@ public class Display extends Canvas implements Observer {
     public void setDisplayMult(Party party1,Party party2) {
         widgets.clear();
         BackgroundWidget backgroundWidget = new BackgroundWidget(width, height);
-        GridWidget gridWidget1 = new GridWidget(15, 8, 80, party1);
-        HeldPieceWidget heldPieceWidget1 = new HeldPieceWidget(2, 8, 20, party1);
-        NextPieceWidget nextPieceWidget1 = new NextPieceWidget(37, 8, 10, 40, party1);
-        InfoWidget infoWidget1 = new InfoWidget(2, 62, 10, 25, party1);
+        GridWidget gridWidget1 = new GridWidget(15, 8, 72, party1);
+        HeldPieceWidget heldPieceWidget1 = new HeldPieceWidget(2, 8, 18, party1);
+        NextPieceWidget nextPieceWidget1 = new NextPieceWidget(40, 8, 10, 36, party1);
+        InfoWidget infoWidget1 = new InfoWidget(2, 62, 10, 23, party1);
 
         int decal = 50;
-        GridWidget gridWidget2 = new GridWidget(15 + decal, 8, 80, party2);
-        HeldPieceWidget heldPieceWidget2 = new HeldPieceWidget(2 + decal, 8, 20, party2);
-        NextPieceWidget nextPieceWidget2 = new NextPieceWidget(37 + decal, 8, 10, 40, party2);
-        InfoWidget infoWidget2 = new InfoWidget(2 + decal, 62, 10, 25, party2);
+        GridWidget gridWidget2 = new GridWidget(15 + decal, 8, 72, party2);
+        HeldPieceWidget heldPieceWidget2 = new HeldPieceWidget(2 + decal, 8, 18, party2);
+        NextPieceWidget nextPieceWidget2 = new NextPieceWidget(40 + decal, 8, 10, 36, party2);
+        InfoWidget infoWidget2 = new InfoWidget(2 + decal, 62, 10, 23, party2);
 
         widgets.add(backgroundWidget);
         widgets.add(gridWidget1);

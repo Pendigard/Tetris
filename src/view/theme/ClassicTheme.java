@@ -7,6 +7,7 @@ import model.block.BlockType;
 import model.grid.Grid;
 import model.piece.Piece;
 import java.awt.*;
+import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.*;
@@ -14,6 +15,8 @@ import javax.sound.sampled.*;
 public class ClassicTheme extends Theme {
 
     private static final Color BACKGROUND_COLOR = new Color(187, 187, 187, 255);
+
+    private Image background;
 
     private static final Color GRID_COLOR = new Color(5, 2, 49, 255);
 
@@ -46,14 +49,6 @@ public class ClassicTheme extends Theme {
         graphics.fillRect( x+borderSize/20, y+borderSize/20, blockSize, blockSize);
     }
 
-
-    @Override
-    public void drawBackground(Graphics graphics){
-        graphics.setColor(BACKGROUND_COLOR);
-        graphics.fillRect( 0, 0, width , height);
-
-    }
-
     @Override
     public void drawBox(Graphics graphics, int x, int y, int width, int height, int opacity) {
         graphics.setColor(GRID_COLOR);
@@ -68,8 +63,16 @@ public class ClassicTheme extends Theme {
     }
 
     @Override
+    public void drawBackground(Graphics graphics) {
+        int imgHeight = height;
+        int imgWidth = (int)(((double) background.getWidth(null) / background.getHeight(null)) * imgHeight);
+        graphics.drawImage(background, 0, 0, imgWidth, imgHeight, null);
+    }
+
+    @Override
     public void loadTheme(){
         fontName = "arial";
+        background = Toolkit.getDefaultToolkit().getImage("resources/images/background/classic_background.png");
     }
 
     @Override
