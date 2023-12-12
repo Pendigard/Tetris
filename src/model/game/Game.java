@@ -53,6 +53,9 @@ public class Game extends Observable implements Runnable {
     public boolean partiesOver() {
         return !party.getAlive();
     }
+    public boolean partiesDuoOver() {
+        return !partyDuo.getAlive();
+    }
 
     @Override
     public void run() {

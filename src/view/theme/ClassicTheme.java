@@ -89,13 +89,4 @@ public class ClassicTheme extends Theme {
             e.printStackTrace();
         }
     }
-
-    @Override
-    public void stopBackgroundMusic() {
-        if (backgroundMusic != null && backgroundMusic.isRunning()) {
-            backgroundMusic.stop();
-            backgroundMusic.close();
-        }
-    }
-
 }

@@ -176,7 +176,12 @@ public abstract class Theme {
 
     public abstract void playBackgroundMusic();
 
-    public abstract void stopBackgroundMusic();
+    public void stopBackgroundMusic() {
+        if (backgroundMusic != null && backgroundMusic.isRunning()) {
+            backgroundMusic.stop();
+            backgroundMusic.close();
+        }
+    }
 
     public Image loadImage(String path){
         return Toolkit.getDefaultToolkit().getImage(path);

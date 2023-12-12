@@ -2,6 +2,7 @@ package view.screen;
 
 import controller.display.Display;
 import controller.menu.GameOverMenu;
+import controller.menu.GameOverDuoMenu;
 import controller.menu.Menu;
 import controller.menu.PauseMenu;
 import model.game.Game;
@@ -101,9 +102,22 @@ public class Screen extends JFrame implements Observer {
             //@Override
             public void run() {
                 if (inGame) {
-                    if (game.partiesOver()) {
-                        inGame = false;
-                        menu = new GameOverMenu();
+                    if(game.duo) {
+                        if (game.partiesOver()) {
+                            inGame = false;
+                            menu = new GameOverDuoMenu(true);
+                            game.pause = true;
+                        }
+                        if (game.partiesDuoOver()) {
+                            inGame = false;
+                            menu = new GameOverDuoMenu(false);
+                            game.pause = true;
+                        }
+                    }else{
+                        if (game.partiesOver()) {
+                            inGame = false;
+                            menu = new GameOverMenu();
+                        }
                     }
                 }
                 if (display != null) {

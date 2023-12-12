@@ -7,7 +7,10 @@ import model.block.BlockType;
 import model.grid.Grid;
 import model.piece.Piece;
 
+import javax.sound.sampled.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class SynthwaveTheme extends Theme{
 
@@ -81,13 +84,22 @@ public class SynthwaveTheme extends Theme{
         fontName = "VCR OSD Mono";
         background = Toolkit.getDefaultToolkit().getImage("resources/images/background/synthwave.jpg");
     }
+
     @Override
     public void playBackgroundMusic() {
+        try {
+            File audioFile = new File("resources/wav/Tetris_SynthWave.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
 
-    }
+            backgroundMusic = AudioSystem.getClip();
+            backgroundMusic.open(audioStream);
 
-    @Override
-    public void stopBackgroundMusic() {
+            backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
 
+            backgroundMusic.start();
+
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }

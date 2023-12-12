@@ -3,6 +3,8 @@ package controller.menu;
 import controller.display.Display;
 import controller.widget.ButtonWidget;
 import view.screen.Screen;
+import javax.swing.*;
+import java.awt.*;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ public abstract class Menu {
 
     protected boolean enter = false;
 
+    ButtonWidget Title;
     ArrayList<ArrayList<ButtonWidget>> buttons;
 
     public Menu() {
@@ -24,6 +27,11 @@ public abstract class Menu {
         choiceX = x;
         choiceY = y;
     }
+
+    protected void addTitle(ButtonWidget button) {
+        Title = button;
+    }
+
 
     protected void addButtonY(ButtonWidget button) {
         buttons.add(new ArrayList<>());
