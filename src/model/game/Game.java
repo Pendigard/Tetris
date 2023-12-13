@@ -21,6 +21,11 @@ public class Game extends Observable implements Runnable {
     }
 
     public void keyPressed(KeyEvent keyEvent, boolean player) {
+        /*
+        @brief : handle the key pressed event
+        @param keyEvent : key pressed event
+        @param player : true if it's the player 1, false if it's the player 2 and duo mode
+         */
         if(player && !partiesOver()){
             switch (keyEvent.getKeyCode()) {
                 case KeyEvent.VK_LEFT -> party.moveLeft();

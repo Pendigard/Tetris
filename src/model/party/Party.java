@@ -7,7 +7,6 @@ import model.piece.*;
 public class Party {
 
     private int score;
-    private int highScore;
     private int level;
     private int lines;
     private int combo = 0;
@@ -53,20 +52,6 @@ public class Party {
 
     public int getLines() {
         return lines;
-    }
-
-    public int getHighScore() {
-        return highScore;
-    }
-
-    public void setHighScore(int highScore) {
-        this.highScore = highScore;
-    }
-
-    public void loadHighScore() {
-        // Load the highscore from a file
-        // TODO
-
     }
 
     public void reset() {

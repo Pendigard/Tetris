@@ -6,10 +6,10 @@ import java.awt.*;
 
 public abstract class Widget {
 
-        protected int propX;
-        protected int propY;
-        protected int propWidth;
-        protected int propHeight;
+        protected int propX; // x position in % of the width of the display
+        protected int propY; // y position in % of the height of the display
+        protected int propWidth; // width in % of the width of the display
+        protected int propHeight; // height in % of the height of the display
 
         public Widget(int x, int y, int propWidth, int propHeight) {
             this.propX = x;

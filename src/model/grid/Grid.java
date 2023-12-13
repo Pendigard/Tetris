@@ -72,6 +72,11 @@ public class Grid {
     }
 
     public boolean isValidPosition(Piece p) {
+        /*
+        @brief : check if the piece is in a valid position
+        @param p : piece to check
+        @return : true if the piece is in a valid position, false otherwise
+         */
         Block[][] piece = p.getBlocks();
         for (int i = 0; i < piece.length; i++) {
             for (int j = 0; j < piece[i].length; j++) {
@@ -88,6 +93,11 @@ public class Grid {
     }
 
     public int putPiece(Piece p) {
+        /*
+        @brief : put the block of the piece in the grid
+        @param p : piece to put
+        @return : number of line completed
+         */
         Block[][] piece = p.getBlocks();
 
         for (int i = 0; i < piece.length; i++) {
