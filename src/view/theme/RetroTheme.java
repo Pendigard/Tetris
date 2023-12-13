@@ -55,6 +55,8 @@ public class RetroTheme extends Theme{
 
     @Override
     public void drawBlock(Graphics graphics, Block block, int borderSize, int x, int y, int opacity)  {
+        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) opacity/255);
+        ((Graphics2D) graphics).setComposite(ac);
         switch (block.getType()) {
             case YELLOW :
                 graphics.drawImage(Iblock[5], x, y, borderSize, borderSize, null);

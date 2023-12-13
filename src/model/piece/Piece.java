@@ -53,7 +53,11 @@ public abstract class Piece implements Cloneable {
         return blocks[rotation];
     }
 
-    public Block[][] getPieceBoundingBox() { // Returns the smallest rectangle containing the piece
+    public Block[][] getPieceBoundingBox() {
+        /*
+        @brief : Returns the smallest rectangle containing the piece's blocks
+        @return : the smallest rectangle containing the piece's blocks
+         */
         int xMin = blocks[rotation].length - 1;
         int xMax = 0;
         int yMin = blocks[rotation][0].length -1;

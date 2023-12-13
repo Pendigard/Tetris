@@ -2,16 +2,10 @@ package controller.display;
 
 import controller.menu.Menu;
 import controller.widget.*;
-import model.game.Game;
 import model.party.Party;
-import view.theme.ClassicTheme;
-import view.theme.SynthwaveTheme;
 import view.theme.Theme;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -38,15 +32,12 @@ public class Display extends Canvas implements Observer {
         menu = null;
     }
 
-    public Display(Theme theme, int width, int height) {
-        widgets = new ArrayList<>();
-        this.theme = theme;
-        this.width = width;
-        this.height = height;
-        theme.playBackgroundMusic();
-    }
-
     public void setDisplaySize(int width, int height) {
+        /*
+        @brief : change the size of the display
+        @param width : new width of the display
+        @param height : new height of the display
+         */
         this.width = width;
         this.height = height;
         theme.setThemeSize(width, height);
@@ -54,6 +45,10 @@ public class Display extends Canvas implements Observer {
 
     @Override
     public void paint(Graphics g) {
+        /*
+        @brief : paint the widgets and the menu in the display to the screen
+        @param g : graphics
+         */
         super.paint(g);
         for (Widget widget : widgets) {
             widget.paint(g, theme);
@@ -82,10 +77,18 @@ public class Display extends Canvas implements Observer {
     }
 
     public void changeMenu(Menu newMenu) {
+        /*
+        @brief : change the menu
+        @param newMenu : new menu
+         */
         menu = newMenu;
     }
 
     public void changeTheme(Theme newTheme) {
+        /*
+        @brief : change the theme
+        @param newTheme : new theme
+         */
         theme.stopBackgroundMusic();
         theme = newTheme;
         theme.playBackgroundMusic();
@@ -93,10 +96,18 @@ public class Display extends Canvas implements Observer {
     }
 
     public Theme getTheme() {
+        /*
+        @brief : return the current theme
+        @return : theme
+         */
         return theme;
     }
 
     public void setDisplaySolo(Party party) {
+        /*
+        @brief : set the display for a solo game
+        @param party : party
+         */
         widgets.clear();
         BackgroundWidget backgroundWidget = new BackgroundWidget(width, height);
         GridWidget gridWidget = new GridWidget(35, 8, 80, party);
@@ -111,6 +122,11 @@ public class Display extends Canvas implements Observer {
     }
 
     public void setDisplayMult(Party party1,Party party2) {
+        /*
+        @brief : set the display for a multiplayer game
+        @param party1 : party of the first player
+        @param party2 : party of the second player
+         */
         widgets.clear();
         BackgroundWidget backgroundWidget = new BackgroundWidget(width, height);
         GridWidget gridWidget1 = new GridWidget(15, 8, 72, party1);
@@ -136,6 +152,9 @@ public class Display extends Canvas implements Observer {
     }
 
     public void setDisplayMenu() {
+        /*
+        @brief : set the display for a menu
+         */
         widgets.clear();
         BackgroundWidget backgroundWidget = new BackgroundWidget(width, height);
         widgets.add(backgroundWidget);

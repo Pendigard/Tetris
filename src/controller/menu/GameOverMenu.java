@@ -22,7 +22,9 @@ public class GameOverMenu extends Menu {
             screen.menu = null;
         }
         else {
-            System.exit(0);
+            screen.inGame = false;
+            screen.menu = new MainMenu();
+            screen.display.setDisplayMenu();
         }
 
     }
