@@ -122,7 +122,7 @@ public class RetroTheme extends Theme{
     @Override
     public void playBackgroundMusic() {
         try {
-            File audioFile = new File("resources/wav/Tetris_SynthWave.wav");
+            File audioFile = new File("resources/wav/Tetris_Retro.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
 
             backgroundMusic = AudioSystem.getClip();
