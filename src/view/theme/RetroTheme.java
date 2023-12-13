@@ -18,7 +18,7 @@ public class RetroTheme extends Theme{
     Image[] Iblock;
 
     public RetroTheme(){
-        super();
+        super("Retro");
         loadTheme();
     }
 

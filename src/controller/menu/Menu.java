@@ -60,6 +60,8 @@ public abstract class Menu {
         if (choiceY < 0) {
             choiceY = buttons.size() - 1;
         }
+        if (choiceX >= buttons.get(choiceY).size())
+            choiceX = buttons.get(choiceY).size() - 1;
     }
 
     protected void down() {
@@ -67,6 +69,8 @@ public abstract class Menu {
         @brief : move the selection down
          */
         choiceY = (choiceY + 1) % buttons.size();
+        if (choiceX >= buttons.get(choiceY).size())
+            choiceX = buttons.get(choiceY).size() - 1;
     }
 
     protected void left() {

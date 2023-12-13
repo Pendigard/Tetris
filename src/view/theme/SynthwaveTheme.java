@@ -18,7 +18,7 @@ public class SynthwaveTheme extends Theme{
     Image background;
 
     public SynthwaveTheme(){
-        super();
+        super("Synthwave");
         loadTheme();
     }
 

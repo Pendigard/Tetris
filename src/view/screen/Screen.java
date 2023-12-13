@@ -9,6 +9,7 @@ import model.game.Game;
 import view.theme.ClassicTheme;
 import view.theme.SynthwaveTheme;
 import view.theme.Theme;
+import view.theme.ThemeLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +29,8 @@ public class Screen extends JFrame implements Observer {
         public boolean pause = false;
 
         public Menu menu = null;
+
+        public ThemeLoader themeLoader = new ThemeLoader();
 
         public Screen(int width, int height, Game game) {
             super("Tetris");
@@ -88,6 +91,10 @@ public class Screen extends JFrame implements Observer {
             if (menu.getEnter()) {
                 menu.update(this);
             }
+        }
+
+        public void addTheme(Theme theme) {
+            themeLoader.loadTheme(theme);
         }
 
     @Override

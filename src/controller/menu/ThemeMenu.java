@@ -5,34 +5,43 @@ import view.screen.Screen;
 import view.theme.ClassicTheme;
 import view.theme.RetroTheme;
 import view.theme.SynthwaveTheme;
+import view.theme.ThemeLoader;
 
 public class ThemeMenu extends Menu {
 
-    public ThemeMenu() {
+    ThemeLoader themeLoader;
+
+    public ThemeMenu(ThemeLoader themeLoader) {
         super();
-        addButtonY(new ButtonWidget(32, 10, 35, 10, "CLASSIC"));
-        addButtonY(new ButtonWidget(32, 30, 35, 10, "SYNTHWAVE"));
-        addButtonY(new ButtonWidget(32, 50, 35, 10, "RETRO"));
-        addButtonY(new ButtonWidget(5, 70, 35, 10, "BACK"));
+        this.themeLoader = themeLoader;
+        createThemeButton();
+        addButtonY(new ButtonWidget(5, 80, 35, 10, "BACK"));
     }
+
+    public void createThemeButton() {
+        /*
+        @brief : create a button to change the theme
+        @param theme : theme to change
+         */
+        int nbrButton = Math.min(themeLoader.getThemes().size(),16);
+        System.out.println(nbrButton);
+        for (int i = 0; i < nbrButton; i+= 4) {
+            for (int j = 0; j < 4; j++) {
+                if (i + j < themeLoader.getThemes().size()) {
+                    addButtonX(new ButtonWidget(5 + 25 * j, 10 + 4 * i, 20, 10, themeLoader.getThemes().get(i + j).getName()), i / 4);
+                }
+            }
+        }
+    }
+
     @Override
     public void update(Screen screen) {
-        switch (choiceY){
-            case 0:
-                screen.display.changeTheme(new ClassicTheme());
-                enter = false;
-                break;
-            case 1:
-                screen.display.changeTheme(new SynthwaveTheme());
-                enter = false;
-                break;
-            case 2:
-                screen.display.changeTheme(new RetroTheme());
-                enter = false;
-                break;
-            case 3:
-                screen.menu = new MainMenu();
-                break;
+        if (choiceY == buttons.size() - 1) {
+            screen.menu = new MainMenu();
+        }
+        else {
+            screen.display.changeTheme(themeLoader.getThemes().get(choiceY*4 + choiceX));
+            enter = false;
         }
     }
 }

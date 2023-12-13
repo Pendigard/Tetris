@@ -21,7 +21,7 @@ public class ClassicTheme extends Theme {
     private static final Color GRID_COLOR = new Color(5, 2, 49, 255);
 
     public ClassicTheme(){
-        super();
+        super("Classic");
         loadTheme();
     }
 

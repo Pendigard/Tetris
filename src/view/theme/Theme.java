@@ -16,6 +16,8 @@ import java.io.IOException;
 
 public abstract class Theme {
 
+    protected String name;
+
     protected int width = 0;
     protected int height = 0;
     protected String fontName;
@@ -23,6 +25,15 @@ public abstract class Theme {
     protected Clip backgroundMusic;
 
     public Theme() {
+        name = "Default";
+    }
+
+    public Theme(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     protected void drawRectBorderSize(Graphics graphics, int x, int y, int width, int height, int borderSize, Color color) {

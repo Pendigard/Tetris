@@ -3,9 +3,7 @@ import controller.menu.MainMenu;
 import controller.widget.*;
 import model.game.Game;
 import view.screen.Screen;
-import view.theme.ClassicTheme;
-import view.theme.SynthwaveTheme;
-import view.theme.Theme;
+import view.theme.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +24,14 @@ public class Tetris {
             e.printStackTrace();
         }
     }
+
+    public static ThemeLoader loadThemes() {
+        ThemeLoader themeLoader = new ThemeLoader();
+        // Load your themes here
+        // themeLoader.loadTheme(new YourTheme());
+        return themeLoader;
+    }
+
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
         SwingUtilities.invokeAndWait(new Runnable() {
                public void run() {
@@ -36,7 +42,9 @@ public class Tetris {
                    Display display = new Display(theme);
                    display.setDisplayMenu();
                    loadFonts();
+                   ThemeLoader themeLoader = new ThemeLoader();
                    Screen screen = new Screen(width, height, game);
+                   screen.themeLoader = loadThemes();
                    screen.setBackground(Color.BLACK);
                    screen.addDisplay(display);
                    screen.menu = new MainMenu();
