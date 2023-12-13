@@ -63,6 +63,7 @@ public class Party {
         grid.reset();
         holdPiece = null;
         isAlive = true;
+        dropInterval = 800;
     }
 
     private Piece getRandPiece() {
@@ -190,8 +191,8 @@ public class Party {
 
     private void updateLevel() {
         level = lines/10 + 1;
-        if (level%10 == 0) {
-            dropInterval = (int)(800*Math.min(Math.pow(0.82, level-1),10));
+        if (lines%10 == 0) {
+            dropInterval = (int)(800*Math.min(Math.pow(0.85, level-1),10));
         }
     }
 
